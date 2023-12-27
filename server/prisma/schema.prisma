@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Investor {
+  NID            String
+  Username       String     @id
+  fullName       String
+  email          String
+  password       String
+  phone          String
+  DoB            DateTime
+  city           String
+  country        String
+  occupation     String
+  industry       String
+  investmentType String
+  Schedule       Schedule[]
+}
+
+model StartupManager {
+  NID           String
+  Username      String        @id
+  fullName      String
+  email         String
+  password      String
+  phone         String
+  major         String
+  expertArea    String
+  highestDegree String
+  city          String
+  startups      startupInfo[]
+  Schedule      Schedule[]
+}
+
+model startupInfo {
+  startupName            String
+  industry               String
+  foundingDate           String
+  location               String
+  tinNumber              String         @id
+  cofounderName          String?
+  coOccupation           String?
+  NID                    String?
+  initialFund            String
+  totalRevenue           String
+  fundingNeeded          String
+  goals                  String         @db.VarChar(500)
+  motivation             String         @db.VarChar(500)
+  briefExplain           String         @db.VarChar(500)
+  Manager                StartupManager @relation(fields: [startupManagerUsername], references: [Username])
+  startupManagerUsername String
+  Schedule               Schedule[]
+}
+
+model Schedule {
+  id Int @id @default(autoincrement())
+
+  date             DateTime
+  investor         Investor?       @relation(fields: [investorUsername], references: [Username])
+  investorUsername String?
+  startupManager   StartupManager? @relation(fields: [managerUsername], references: [Username])
+  managerUsername  String?
+  startupInfo      startupInfo?    @relation(fields: [tinNumber], references: [tinNumber])
+  tinNumber        String?
+}

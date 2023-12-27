@@ -1,0 +1,75 @@
+/* .main {
+	display: flex;
+}
+.holder {
+	height: 500px;
+	width: 600px;
+	padding-top: 40px;
+	padding-left: 20px;
+
+	
+	display: flex;
+	margin-left: 66%;
+	margin-top: 15%;
+
+	background-color: rgb(154, 154, 158);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+}
+.input-header {
+	font-size: 22px;
+}
+.header-details {
+	font-size: 30px;
+	font-weight: 500;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.form {
+	height: 100px;
+	width: auto;
+}
+
+form input[type="time"],
+form input[type="date"],
+form input[type="Startup Code"] {
+	font-family: "Arial", sans-serif; 
+	font-size: 18px; 
+}
+
+.New-meeting {
+	margin-top: 3%;
+	margin-bottom: 10%;
+	margin-left: 15px;
+	width: 90%;
+	height: 90%;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.container {
+	display: flex;
+}
+
+.form-content {
+	padding: 30px;
+	width: 100%;
+}
+.header-meeting {
+	padding-top: 20px;
+	text-align: center;
+}
+.label {
+	font-size: 20px;
+	padding-bottom: 20px;
+}
+.btn {
+	width: 100px;
+	height: 50px;
+}
+
+.buttons {
+	text-align: center;
+} */
+.main{
+	display: flex;
+	width: 100%;
+	
+}
