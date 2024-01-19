@@ -1,0 +1,68 @@
+/* .feed-container{
+    position: relative;
+    width: 1300px;
+    height: auto;
+    padding: 40px;
+    display: flex;
+} */
+
+.mb-3 {
+	max-width: 400px;
+}
+.feed-header {
+	padding-top: 100px;
+	padding-left: 120px;
+}
+.feed-header-h1 {
+	font-size: 45px;
+	font-weight: 600;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.feed {
+	flex: 7;
+}
+.card-holder {
+	display: flex;
+	flex-wrap: wrap;
+
+	padding-top: 70px;
+	padding-left: 30px;
+	gap: 50px;
+	margin-left: 70px;
+}
+
+.card {
+	width: 100%; /* Adjust the width as needed */
+	max-width: 300px; /* Set a maximum width for responsiveness */
+	height: 300px !important; /* Set a fixed height */
+	margin: 10px;
+	background-color: rgb(224, 231, 231) !important;
+}
+.card-title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: 600;
+}
+.radiobuttons {
+	padding-top: 10px;
+	padding-left: 20px;
+	font-size: 25px;
+}
+.radiobuttons label {
+	margin-right: 20px !important;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.btn.btn-secondary.b {
+	margin-top: 2rem;
+	width: 140px;
+}
+
+.radiobuttons label input {
+	margin-right: 5px; /* Add space between radio buttons and labels */
+}
+
+.nothing-found {
+	font-family: Arial, Helvetica, sans-serif;
+}

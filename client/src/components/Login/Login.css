@@ -1,0 +1,133 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.home {
+	height: 80px;
+	width: auto;
+	position: absolute;
+	justify-content: left;
+	display: inline-block;
+}
+
+.home-button {
+	height: 60px;
+	width: auto;
+	position: absolute;
+	justify-content: left;
+	display: inline-block;
+	font-size: 40px;
+	font-weight: 700;
+	color: aliceblue;
+	left: 40px;
+	top: 10px;
+}
+
+/* Main body styles */
+.main-body {
+	min-height: 100vh; /* Ensure the main body takes at least the full viewport height */
+	width: 100%;
+	background-color: rgb(236, 250, 248) !important;
+	position: relative;
+}
+
+.form-body {
+	width: 100%;
+	max-width: 850px; /* Set a maximum width for larger screens */
+	margin: 0 auto; /* Center the form on larger screens */
+	background-color: powderblue;
+	border: 2px solid rgb(0, 32, 32);
+	box-sizing: border-box;
+}
+
+.left {
+	width: 100%;
+	max-width: 47%; /* Set a maximum width for larger screens */
+	display: block;
+	background-color: aliceblue;
+}
+
+.right {
+	width: 100%;
+	max-width: 53%; /* Set a maximum width for larger screens */
+	display: block;
+	background-color: rgb(2, 75, 75);
+}
+
+.login-pic {
+	margin-left: 25px;
+	margin-top: 20px;
+	width: 90%;
+	max-height: 90vh; /* Set a maximum height for larger screens */
+	filter: opacity(90%);
+}
+
+.form-heading {
+	margin-top: 40px;
+	font-size: 50px;
+	font-weight: 800;
+	text-align: center;
+	color: aliceblue;
+	font-family: "Times New Roman", Times, serif;
+}
+
+.login-form {
+	width: 97%;
+	margin: 0 auto; /* Center the form on larger screens */
+	max-width: 700px; /* Set a maximum width for larger screens */
+	height: auto; /* Adjust the height to fit the content */
+	background-color: rgb(2, 77, 70);
+	box-sizing: border-box;
+}
+
+.login-form input {
+	width: 90%;
+	height: 60px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 5%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.login-form button {
+	width: 80%;
+	margin-top: 20px;
+	margin-left: 10%;
+	padding: 12px;
+	background-color: #aeafae;
+	color: #fff;
+	border-radius: 4px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.new {
+	color: white;
+	text-align: center;
+	font-family: "Roboto Mono", monospace;
+}
+
+.new .no-account {
+	font-size: 18px;
+	font-weight: 600;
+	font-family: "Roboto Mono", monospace;
+}
+
+.new .open {
+	color: #ebe70f;
+}
+
+/* Responsive adjustments using media queries */
+@media (max-width: 768px) {
+	.left,
+	.right {
+		max-width: 100%; /* Allow both blocks to take the full width on smaller screens */
+	}
+
+	.login-form button {
+		width: 100%; /* Allow the button to take the full width on smaller screens */
+	}
+}

@@ -1,0 +1,29 @@
+.startup-portfolio {
+	flex: 1.5;
+
+	border-right: solid 1px;
+}
+
+.portfolio {
+	height: 900px;
+	width: auto;
+	background-color: rgb(245, 247, 247);
+	margin: 2rem;
+	border: solid 2px;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.porichoy {
+	display: flex;
+	font-size: 20px;
+}
+.information-para {
+	font-size: 20px;
+}
+.username {
+	font-size: 25px;
+	font-weight: 600;
+	margin-bottom: 1rem;
+}

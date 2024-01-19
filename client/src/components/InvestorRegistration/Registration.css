@@ -1,0 +1,33 @@
+.form-container {
+	width: 35%;
+
+	border: 1px solid #1a1818;
+	margin-top: 3%;
+	margin-left: 40rem;
+	padding: 60px;
+	padding-left: 100px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	background-color: rgb(216, 214, 212);
+	
+	position: relative;
+}
+.head {
+	font-size: 40px;
+	font-weight: 700;
+	margin-bottom: 40px;
+}
+.btn {
+	margin-right: 40px;
+	margin-left: 10px;
+}
+.c {
+	width: 200px;
+}
+
+.writing {
+	display: flex;
+	background-color: rgb(169, 188, 204);
+}
+/* .investment-header {
+	flex: 1;
+} */

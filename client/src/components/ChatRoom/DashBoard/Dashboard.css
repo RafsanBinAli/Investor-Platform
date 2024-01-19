@@ -1,0 +1,75 @@
+.dashboard {
+	display: flex;
+	flex: 2;
+	border-right: solid 1px;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 2px 3px#c4c6c9;
+	height: 91vh;
+}
+
+.inside-dash {
+	display: flex;
+	flex-direction: column;
+	height: 91vh;
+	width: 100%;
+	overflow: auto;
+}
+.name {
+	font-size: 20px;
+	font-weight: 500;
+}
+.type {
+	font-size: 14px;
+	font-weight: 400;
+}
+.my-profile {
+	margin-left: 1rem;
+	display: flex; /* Add display: flex to make it a flex container */
+	flex-direction: column;
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.profile-pic {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	border: 2px solid #0c0c0c;
+}
+
+.profile-box {
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 50px;
+	border-bottom: solid 1px;
+}
+.contacts {
+	height: 100px;
+	width: 80%;
+	display: flex;
+	margin-bottom: 25px;
+	align-items: center; /* Align hr vertically in the middle */
+	/* border-bottom: solid 1px gray; */
+	/* box-shadow: 0px 2px 3px#c4c6c9; */
+	padding-left: 20px;
+	margin-left: 2rem;
+	border-bottom: solid 1px gray;
+}
+.message-dash-header {
+	font-size: 18px;
+	margin-left: 2rem;
+	margin-bottom: 2rem;
+	font-family: Arial, Helvetica, sans-serif;
+	color: rgb(9, 37, 160);
+	font-weight: 600;
+}
+
+.contact-name {
+	margin-left: 10px;
+	margin-top: 12px;
+}

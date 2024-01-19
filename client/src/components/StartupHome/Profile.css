@@ -1,0 +1,36 @@
+.profile-holder {
+	border-right: solid 1px;
+	flex: 3;
+}
+.Profile {
+	height: 600px;
+	width: auto;
+	background-color: rgb(247, 255, 255);
+	margin: 2rem;
+	border: solid 1px;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add your shadow values here */
+}
+
+.pic {
+	background-color: rgb(139, 206, 206);
+	width: 55%;
+	height: 45%;
+	margin-top: 3rem;
+	margin-left: 15%;
+}
+.chobi {
+	object-fit: cover;
+}
+.info {
+	width: 60%;
+	height: 40%;
+	margin-top: 2rem;
+	margin-left: 15%;
+}
+.p {
+	color: black;
+	font-weight: bolder;
+	font-family: "Times New Roman", Times, serif;
+}

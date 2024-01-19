@@ -1,0 +1,43 @@
+.Search-Header {
+	padding-bottom: 20px;
+	font-family: "Times New Roman", Times, serif;
+}
+.header {
+	font-size: 40px !important;
+	font-weight: 600;
+}
+.chart {
+	margin-left: 20px;
+	height: 500px;
+	width: 450px;
+
+	margin-right: 3rem;
+	padding-top: 7rem;
+}
+.chartHeader {
+	font-size: 40px;
+	margin-bottom: 40px;
+	font-family: "Times New Roman", Times, serif;
+	font-weight: 700;
+}
+.rightbar-inside {
+	margin-top: 7rem;
+}
+.mt-3 {
+	padding: 5rem;
+
+	border: 2px solid;
+}
+
+.rightbar {
+	flex: 2;
+	border-left: solid 2px rgb(230, 229, 229);
+	padding: 20px;
+}
+
+.form-control {
+	right: 0px;
+}
+.rightbar-inside {
+	margin-left: 50px;
+}

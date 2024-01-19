@@ -1,0 +1,42 @@
+
+
+.navbar-nav .nav-item {
+	margin-right: 20px; /* Adjust the right margin as needed */
+	transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.navbar-nav .nav-item:hover {
+	transform: scale(1.1); /* Increase size on hover */
+}
+.navbar-brand {
+	margin-right: 60rem;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.navbar-nav.ml-auto {
+	margin-right: 70px;
+}
+.navbar-nav.ml-auto .logout-link {
+	font-weight: 550 !important;
+}
+
+.navbar-nav .nav-item .nav-link {
+	font-size: 20px; /* Adjust the font size of the list items as needed */
+	font-weight: 500;
+	transition: transform 0.3s ease-in-out;
+}
+
+.navbar {
+	height: 80px; /* Adjust the height as needed */
+}
+
+@media (max-width: 768px) {
+	.navbar-brand {
+		margin-right: 2rem; /* Adjust margin for smaller screens */
+	}
+
+	.navbar-nav .nav-item .nav-link {
+		font-size: 16px; /* Decrease font size for smaller screens */
+	}
+}

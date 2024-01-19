@@ -1,0 +1,117 @@
+/* styles.css */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.top {
+  
+  flex-direction: column;
+  height: 150vh;
+}
+
+.Home-main {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.background-image {
+  margin-top: 7rem;
+  background-image: url("/home/octopus/Pictures/invest.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50%;
+  height: 450px;
+  
+}
+
+.lekha {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  
+  margin-top: 7rem;
+  /* You can adjust the margin-top as needed */
+  font-size: 24px;
+  color: rgb(20, 1, 1);
+}
+
+/* Add the following styles to adjust the positioning */
+.Home-main .lekha {
+	margin-top: 7rem;
+}
+
+nav {
+	background-color: #292b2e; /* Customize the navbar background color */
+	color: white;
+	padding: 30px;
+	text-align: center;
+}
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+}
+
+li {
+	margin: 0 30px;
+	cursor: pointer;
+	font-size: 22px;
+	font-weight: 600;
+}
+.header {
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	font-size: 55px;
+}
+
+.Home-heading {
+	margin-left: 100px;
+}
+.More-heading {
+	margin-top: 5rem;
+	margin: 5rem;
+	font-size: 18px;
+}
+.join-header {
+	padding: 20px;
+	margin-left: 5rem;
+	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+	font-weight: 600;
+}
+.button {
+	margin-left: 7rem;
+	gap: 2px;
+}
+
+.join {
+  position: absolute; /* Position the element absolutely */
+  top: 100%; /* Position the element below its parent */
+  left: 20%; /* Center the element horizontally */
+  transform: translate(-50%, -50%); /* Center the element vertically */
+  margin-top: 2rem; /* Add some top margin to avoid overlapping */
+ 
+  font-size: 24px;
+  font-weight: bold;
+}
+.join-button {
+  padding: 10px 20px;
+  background-color: #435f75; /* Green background color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  transition: opacity 0.3s ease-in-out; /* Smooth opacity transition */
+  margin-right: 40px;
+  width: 300px;
+  
+}
+
+.join-button:hover {
+  background-color: #011802; /* Darker green background color on hover */
+  opacity: 0.8; /* Reduce opacity on hover */
+}

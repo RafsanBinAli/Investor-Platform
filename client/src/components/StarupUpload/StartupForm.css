@@ -1,0 +1,20 @@
+.mai{
+    background-color: rgb(229, 216, 201);
+    color: aqua;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 3%;
+    height: auto;
+}
+
+.form{
+    margin-top: 5rem;
+    background-color: rgb(204, 228, 228);
+    width: 40%;
+    margin-left: 30%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #1a1818; 
+    padding: 40px;
+    padding-left: 10%;
+}
