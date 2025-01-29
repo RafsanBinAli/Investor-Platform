@@ -1,61 +1,19 @@
 var express = require("express");
 var router = express.Router();
 const { PrismaClient } = require("@prisma/client");
+const { signup, login } = require("../controllers/investors");
 const prisma = new PrismaClient();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+  res.json({message:"hello!"})
 });
 
 //Signup for investor
-router.post("/signup", async (req, res) => {
-  console.log("Received signup request:", req.body);
-  try {
-    const { body } = req;
-    const user = await prisma.investor.create({
-      data: {
-        Username: body.Username,
-        fullName: body.fullName,
-        email: body.email,
-        password: body.password,
-        phone: body.phone,
-        DoB: body.DoB,
-        city: body.city,
-        country: body.country,
-        occupation: body.occupation,
-        industry: body.industry,
-        investmentType: body.investmentType,
-        NID: body.NID,
-      },
-    });
-    console.log("User created successfully");
-    res.status(200).json({ message: "User created successfully" });
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+router.post("/signup", signup);
 
 //login for investor
-router.post("/login", async (req, res) => {
-  try {
-    const user = await prisma.investor.findUnique({
-      where: { Username: req.body.Username },
-    });
-
-    if (!user || user.password != req.body.password) {
-      return res.status(401).json({ error: "Invalid username or password" });
-    }
-    res.status(200).json({ message: "Login successful", user: user });
-    console.log("It is called!");
-
-    console.log(req.body);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+router.post("/login",login);
 
 //showing the startup at investor Homepage
 router.get("/investor-home", async (req, res) => {
