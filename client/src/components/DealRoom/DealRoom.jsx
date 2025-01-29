@@ -1,15 +1,14 @@
 import DealRoomFeed from "./DealRoomBody";
-import "./DealRoom.css"
+import "./DealRoom.css";
 
-const DealRoom = () =>{
-    return(
-        <>
-       
-        <div className="main-container">
-            <DealRoomFeed />
-        </div>
-        </>
-    )
-}
+const DealRoom = () => {
+  return (
+    <>
+      <div className="main-container">
+        <DealRoomFeed />
+      </div>
+    </>
+  );
+};
 
 export default DealRoom;

@@ -1,5 +1,3 @@
-// Step3.js
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Step3 = ({ formData, updateFormData, onBack }) => {
@@ -39,8 +37,6 @@ const Step3 = ({ formData, updateFormData, onBack }) => {
 				alert("Registration successful!");
 				navigate("/login");
 			}
-
-			const data = await response.json();
 		} catch (error) {
 			console.error("Error fetching data:", error.message);
 		}

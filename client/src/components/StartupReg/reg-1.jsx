@@ -1,20 +1,18 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import React, { useState } from 'react';
-
-const Reg1 = ({ formData, updateFormData,onNext }) => {
-  
-
+const Reg1 = ({ formData, updateFormData, onNext }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    updateFormData(name,value);
+    updateFormData(name, value);
   };
 
   return (
     <div>
-      <h3 style={{ marginBottom: '40px', fontSize: '24px' }}>Step 1: Basic Information</h3>
+      <h3 style={{ marginBottom: "40px", fontSize: "24px" }}>
+        Step 1: Basic Information
+      </h3>
       <form>
-      <div className="mb-3">
+        <div className="mb-3">
           <label htmlFor="Username" className="form-label">
             Username
           </label>

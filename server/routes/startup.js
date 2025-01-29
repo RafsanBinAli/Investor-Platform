@@ -4,56 +4,14 @@ const { PrismaClient } = require("@prisma/client");
 const {
   PrismaClientKnownRequestError,
 } = require("@prisma/client/runtime/library");
+const { signup, login } = require("../controllers/manager");
 const prisma = new PrismaClient();
 
 //startup Signup
-router.post("/signup", async (req, res) => {
-  console.log(req.body);
-  try {
-    const { body } = req;
-    const user = await prisma.startupManager.create({
-      data: {
-        city: body.city,
-
-        Username: body.Username,
-        fullName: body.fullName,
-        email: body.email,
-        password: body.password,
-        phone: body.phone,
-        NID: body.NID,
-        highestDegree: body.highestDegree,
-        major: body.major,
-        expertArea: body.expertArea,
-      },
-    });
-
-    console.log("User created successfully");
-    res.status(200).json({ message: "User created successfully" });
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+router.post("/signup", signup);
 
 //startup login
-router.post("/login", async (req, res) => {
-  try {
-    const user = await prisma.startupManager.findUnique({
-      where: { Username: req.body.username },
-    });
-
-    if (!user || user.password !== req.body.password) {
-      return res.status(401).json({ error: "Invalid username or password" });
-    }
-
-    res.status(200).json({ message: "Login successful", user: user });
-    console.log("It is called!");
-    console.log(req.body);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+router.post("/login", login);
 
 //statup upload
 router.post("/upload", async (req, res) => {
@@ -126,7 +84,6 @@ router.get("/profile/:tinNumber", async (req, res) => {
 router.get("/manager-profile", async (req, res) => {
   try {
     const username = req.query.username;
-    console.log(username);
 
     const startupManager = await prisma.startupManager.findUnique({
       where: {

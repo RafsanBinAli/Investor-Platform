@@ -1,6 +1,3 @@
-// Step2.js
-import React, { useState } from "react";
-
 const Step2 = ({ formData, updateFormData, onNext, onBack }) => {
 	const handleChange = (e) => {
 		const { name, value } = e.target;

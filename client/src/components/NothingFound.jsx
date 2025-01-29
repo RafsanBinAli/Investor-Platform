@@ -1,9 +1,8 @@
-const NothingFound=()=>{
-    return(
-        <>
-        <div>
-            Nothing Here you dumb ass!
-        </div></>
-    )
-}
+const NothingFound = () => {
+  return (
+    <>
+      <div>Nothing Here you dumb ass!</div>
+    </>
+  );
+};
 export default NothingFound;

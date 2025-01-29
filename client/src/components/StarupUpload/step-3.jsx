@@ -1,15 +1,14 @@
-const Step3s=({formData, updateFormData,onNext,onPrev})=>{
-    const handleChange=(e)=>{
-        const {name,value} = e.target;
-        updateFormData(name,value)
-    }
-    return (
-        <>
-        <div>
+const Step3s = ({ formData, updateFormData, onNext, onPrev }) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    updateFormData(name, value);
+  };
+  return (
+    <>
+      <div>
         <h2>Step 3: Funding Details</h2>
         <form>
-
-        <div className="mb-3">
+          <div className="mb-3">
             <label htmlFor="initialFund" className="form-label">
               Initial Fund
             </label>
@@ -36,7 +35,7 @@ const Step3s=({formData, updateFormData,onNext,onPrev})=>{
               onChange={handleChange}
             />
           </div>
-          
+
           <div className="mb-3">
             <label htmlFor="fundingNeeded" className="form-label">
               Funding Needed
@@ -50,10 +49,7 @@ const Step3s=({formData, updateFormData,onNext,onPrev})=>{
               onChange={handleChange}
             />
           </div>
-          
-          
-          
-          
+
           <button type="button" className="btn btn-secondary" onClick={onPrev}>
             Back
           </button>
@@ -62,7 +58,7 @@ const Step3s=({formData, updateFormData,onNext,onPrev})=>{
           </button>
         </form>
       </div>
-        </>
-    )
-}
+    </>
+  );
+};
 export default Step3s;

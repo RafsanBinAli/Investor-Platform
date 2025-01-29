@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
@@ -15,7 +15,6 @@ import StartupHome from "./components/StartupHome/StartupHome";
 import StartupNavbar from "./components/NavBar/StartupNavbar";
 import StartupForm from "./components/StarupUpload/StartupForm";
 import StartupShow from "./components/StartupShow/StartupShow";
-import Footer from "./components/Footer/footer";
 import InvestorProfile from "./components/InvestorProfile/InvestorProfile";
 import StartupManagerProfile from "./components/StartupManagerProfile/StartupManagerProfile";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
@@ -23,7 +22,6 @@ import NotificationView from "./components/NotificationView/NotificationView";
 import InvestorNavbar from "./components/NavBar/InvestorNavbar";
 
 const App = () => {
-	const [tinNumber, setTinNumber] = useState("");
 	const { userType, isLoggedIn } = useContext(UserContext);
 	return (
 		<>
@@ -54,7 +52,6 @@ const App = () => {
 					<Route path="*" element={<NothingFound />} />
 				</Routes>
 			</Router>
-			{/* <Footer/> */}
 		</>
 	);
 };

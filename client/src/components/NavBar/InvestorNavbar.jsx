@@ -5,7 +5,7 @@ import UserContext from "../../contexts/userContext";
 
 
 const InvestorNavbar = () => {
-	const {setIsLoggedIn,setUserType,setManagerUsername,managerUsername}=useContext(UserContext);
+	const {setIsLoggedIn,setUserType}=useContext(UserContext);
  
 	const handleLogout=()=>{
 		setIsLoggedIn(false);
