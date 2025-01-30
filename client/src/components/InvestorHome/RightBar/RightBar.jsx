@@ -12,7 +12,7 @@ const RightBar = ({ onSearch }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:4000/bar`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/bar`);
 
       if (!response.ok) {
         console.log("error fetching data");

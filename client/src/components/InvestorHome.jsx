@@ -10,11 +10,7 @@ function InvestorHome() {
   return (
     <>
       <div className="main-contain">
-        <Routes>
-          <Route path="/" element={<Body />} />
-
-          <Route path="/investor-forum" element={<RightBar />} />
-        </Routes>
+        <Body/>
       </div>
     </>
   );

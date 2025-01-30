@@ -16,7 +16,7 @@ var startupRouter = require('./routes/startup');
 var app = express();
 const httpServer = http.createServer(app);
 const io = initializeSocket(httpServer);
-const PORT = 4000;
+const PORT = 5000;
 
 // Middleware
 app.use(logger('dev'));

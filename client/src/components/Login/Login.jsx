@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
 
 const Login = () => {
+  
   const { setIsLoggedIn, setUserType, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -23,7 +24,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:4000/login", {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
