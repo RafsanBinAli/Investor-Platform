@@ -7,7 +7,7 @@ exports.signup = async (req, res) => {
     await prisma.startupManager.create({
       data: { ...req.body }
     });
-    res.status(200).json({ message: "User created successfully" });
+    res.status(200).json({ message: "Manager created successfully" });
   } catch (error) {
     console.error("Signup error:", error);
     res.status(500).json({ error: "Internal Server Error" });

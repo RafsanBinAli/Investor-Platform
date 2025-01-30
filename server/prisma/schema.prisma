@@ -59,7 +59,6 @@ model startupInfo {
   tinNumber              String         @id
   cofounderName          String?
   coOccupation           String?
-  NID                    String?
   initialFund            String
   totalRevenue           String
   fundingNeeded          String
