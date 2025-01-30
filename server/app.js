@@ -7,13 +7,16 @@ const cors = require('cors');
 const http = require('http');
 const initializeSocket = require('./public/javascripts/socket');
 
+const { PrismaClient } = require('@prisma/client');
+const mysql = require('mysql2/promise');
+const prisma = new PrismaClient();
 var indexRouter = require('./routes/index');
 var startupRouter = require('./routes/startup');
 
 var app = express();
 const httpServer = http.createServer(app);
 const io = initializeSocket(httpServer);
-const PORT = 5000;
+const PORT = 4000;
 
 // Middleware
 app.use(logger('dev'));
@@ -41,7 +44,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-httpServer.listen(PORT, () => {
+
+httpServer.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
 });
 

@@ -2,32 +2,23 @@ var express = require("express");
 var router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const { signup, login } = require("../controllers/investors");
+const { allStartups } = require("../controllers/startup");
+const { getParticularMeeting } = require("../controllers/schedule");
 const prisma = new PrismaClient();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.json({message:"hello!"})
+  res.json({ message: "hello!" });
 });
 
 //Signup for investor
 router.post("/signup", signup);
 
 //login for investor
-router.post("/login",login);
+router.post("/login", login);
 
 //showing the startup at investor Homepage
-router.get("/investor-home", async (req, res) => {
-  try {
-    const startupInfo = await prisma.startupInfo.findMany();
-
-    if (!startupInfo || startupInfo.length === 0) {
-      console.log("Nothing Found!");
-    }
-    res.status(200).json({ startupInfo });
-  } catch (error) {
-    console.log(error);
-  }
-});
+router.get("/investor-home", allStartups);
 
 //getting startup info using tinNumber
 router.get("/startup-info/:tinNumber", async (req, res) => {
@@ -45,16 +36,12 @@ router.get("/startup-info/:tinNumber", async (req, res) => {
   }
 });
 
-//set meeting for investor 
+//set meeting for investor
 router.post("/set-meeting/:username", async (req, res) => {
   const { time, date, tinNumber } = req.body;
   const { username } = req.params;
 
   try {
-    if (!time || !date || !tinNumber) {
-      console.log("Some fields are missing!");
-      return res.status(400).json({ message: "Some fields are missing" });
-    }
     // Find the investor
     const investor = await prisma.investor.findUnique({
       where: { Username: username },
@@ -83,8 +70,7 @@ router.post("/set-meeting/:username", async (req, res) => {
     //schedule create
     const updatedSchedule = await prisma.schedule.create({
       data: {
-        
-        date: new Date(`${date}T${time}`), 
+        date: new Date(`${date}T${time}`),
         investor: {
           connect: { Username: username },
         },
@@ -97,70 +83,35 @@ router.post("/set-meeting/:username", async (req, res) => {
       },
     });
 
-    console.log("Updated Schedule:", updatedSchedule);
-
     try {
       //create notification about meeting
       const notification = await prisma.notifications.create({
         data: {
           primaryActor: {
-            connect: { Username: username }, 
+            connect: { Username: username },
           },
           secondaryActor: {
-            connect: { Username: startupManager.Username }, 
+            connect: { Username: startupManager.Username },
           },
           about: "meeting",
           meetingTime: new Date(`${date}T${time}`),
         },
       });
     } catch (error) {
-      console.log("the error is", error);
+      console.log( error);
     }
 
-   
     return res
       .status(200)
       .json({ success: true, message: "Meeting set successfully" });
   } catch (error) {
-    console.error("Error:", error);
+    console.log( error);
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
 //searching meeting
-router.get("/meeting-searched/:code", async (req, res) => {
-  try {
-    const { code } = req.params;
-    console.log(code);
-
-    const meeting = await prisma.schedule.findMany({
-      where: {
-        tinNumber: code,
-      },
-      select: {
-        date: true,
-      },
-    });
-
-    if (meeting.length === 0) {
-      console.log("There is no meeting found!");
-      return res
-        .status(404)
-        .json({ success: false, message: "Meeting not found" });
-    }
-
-    const meetingData = meeting[0].date; 
-
-    return res.status(200).json({
-      meetingData,
-    });
-  } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
-  }
-});
+router.get("/meeting-searched/:code", getParticularMeeting);
 
 //search function of investor-home page about startup
 router.get("/search-by-name/:name", async (req, res) => {
@@ -194,7 +145,6 @@ router.get("/investor-profile", async (req, res) => {
     if (!investor) {
       console.log("Not found any investor");
     }
-    console.log("Found");
     return res.status(200).json({
       investor,
     });
@@ -242,7 +192,6 @@ router.get("/get-managerName", async (req, res) => {
 // bar chart for graph
 router.get("/bar", async (req, res) => {
   try {
-    console.log("paise");
 
     const startupInfo = await prisma.startupInfo.findMany();
 
@@ -267,16 +216,13 @@ router.get("/bar", async (req, res) => {
   }
 });
 
-//sending message 
+//sending message
 
 router.post("/send-message", async (req, res) => {
   try {
     const { senderUsername, receiverUsername, content } = req.body;
-    console.log(senderUsername, receiverUsername, content);
     const [senderName, senderType] = senderUsername.split("+");
-    console.log(senderName, senderType);
     const [receiverName, receiverType] = receiverUsername.split("+");
-    console.log(receiverName, receiverType);
 
     let conversation = await prisma.conversation.findFirst({
       where: {
@@ -335,7 +281,7 @@ router.post("/send-message", async (req, res) => {
             },
           });
         } catch (error) {
-          console.log("the error is", error);
+          console.log(error);
         }
 
         console.log(
@@ -347,8 +293,7 @@ router.post("/send-message", async (req, res) => {
         `Conversation already exists between ${senderName} and ${receiverName}`
       );
     }
-    
-   
+
     const message = await prisma.message.create({
       data: {
         content,
@@ -381,7 +326,6 @@ router.post("/send-message", async (req, res) => {
 
 //getting the prev conversations for Dashboard
 router.get("/conversations", async (req, res) => {
-  
   const senderUsername = req.query.username;
   try {
     const conversation = await prisma.conversation.findMany({
@@ -398,11 +342,9 @@ router.get("/conversations", async (req, res) => {
     });
 
     if (conversation.length != 0) {
-      console.log(conversation);
       const conversationIds = conversation.map(
         (conversation) => conversation.id
       );
-      console.log(conversationIds);
 
       const otherNames = [];
 
@@ -456,14 +398,12 @@ router.get("/conversations", async (req, res) => {
 //message retriving for message section to show all the message in a conversation
 router.get("/message-retriving", async (req, res) => {
   const convoID = req.query.convoID;
-  console.log(convoID);
   try {
     const messages = await prisma.message.findMany({
       where: {
         conversationId: Number(convoID),
       },
     });
-    console.log(messages);
     const formattedMessages = messages.map((message) => ({
       id: message.id,
       content: message.content,
@@ -477,7 +417,6 @@ router.get("/message-retriving", async (req, res) => {
     res.status(500).json("jhamela hoise");
   }
 });
-
 
 //create new conversation
 router.post("/create-convo", async (req, res) => {
@@ -493,7 +432,6 @@ router.post("/create-convo", async (req, res) => {
     });
 
     if (conversation) {
-     
       const conversationData = {
         id: conversation.id,
         startupManagerUsername: conversation.startupManagerUsername,

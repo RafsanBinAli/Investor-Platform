@@ -31,3 +31,23 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.managerProfile= async (req, res) => {
+  try {
+    const username = req.query.username;
+
+    const startupManager = await prisma.startupManager.findUnique({
+      where: {
+        Username: username,
+      },
+    });
+    if (!startupManager) {
+      console.log("Not found any investor");
+    }
+    return res.status(200).json({
+      startupManager,
+    });
+  } catch {
+    console.log("error");
+  }
+};

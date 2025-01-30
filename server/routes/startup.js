@@ -4,7 +4,9 @@ const { PrismaClient } = require("@prisma/client");
 const {
   PrismaClientKnownRequestError,
 } = require("@prisma/client/runtime/library");
-const { signup, login } = require("../controllers/manager");
+const { signup, login, managerProfile } = require("../controllers/manager");
+const { uploadStartup, startupProfile } = require("../controllers/startup");
+const { notifications } = require("../controllers/communication");
 const prisma = new PrismaClient();
 
 //startup Signup
@@ -14,102 +16,22 @@ router.post("/signup", signup);
 router.post("/login", login);
 
 //statup upload
-router.post("/upload", async (req, res) => {
-  try {
-    const { body } = req;
-
-    const startupManager = await prisma.startupManager.findUnique({
-      where: { Username: body.startupManagerUsername },
-    });
-
-    if (!startupManager) {
-      return res.status(404).json({ error: "Startup manager not found" });
-    }
-
-    const startupInfo = await prisma.startupInfo.create({
-      data: {
-        startupName: body.startupName,
-        industry: body.industry,
-        foundingDate: body.foundingDate,
-        location: body.location,
-        tinNumber: body.tinNumber,
-        cofounderName: body.cofounderName,
-        coOccupation: body.coOccupation,
-        NID: body.NID,
-        initialFund: body.initialFund,
-        totalRevenue: body.totalRevenue,
-        fundingNeeded: body.fundingNeeded,
-        goals: body.goals,
-        motivation: body.motivation,
-        briefExplain: body.briefExplain,
-        Manager: {
-          connect: { Username: startupManager.Username },
-        },
-      },
-    });
-
-    console.log("StartupInfo created successfully");
-    res
-      .status(200)
-      .json({ message: "StartupInfo created successfully", startupInfo });
-  } catch (error) {
-    console.error("Error creating startupInfo:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+router.post("/upload", uploadStartup);
 
 //getting startupInfo Profile
-router.get("/profile/:tinNumber", async (req, res) => {
-  try {
-    console.log("paise");
-    const { tinNumber } = req.params;
-    const startupInfo = await prisma.startupInfo.findUnique({
-      where: { tinNumber: tinNumber },
-      include: { Manager: true },
-    });
-    if (!startupInfo) {
-      console.log("Not Found");
-    }
-    console.log(startupInfo);
-    const managerInfo = startupInfo.Manager;
-    console.log(tinNumber);
-    console.log(managerInfo.startups);
-    res.status(200).json({ ...managerInfo, startups: [startupInfo] });
-  } catch (error) {
-    console.log(error);
-  }
-});
+router.get("/profile/:tinNumber", startupProfile);
 
 //getting startup Manager Profile
-router.get("/manager-profile", async (req, res) => {
-  try {
-    const username = req.query.username;
+router.get("/manager-profile", managerProfile);
 
-    const startupManager = await prisma.startupManager.findUnique({
-      where: {
-        Username: username,
-      },
-    });
-    if (!startupManager) {
-      console.log("Not found any investor");
-    }
-    console.log("Found");
-    return res.status(200).json({
-      startupManager,
-    });
-  } catch {
-    console.log("error");
-  }
-});
-
-//startup Manager Homepage 
+//startup Manager Homepage
 router.get("/home/:username", async (req, res) => {
   try {
     const { username } = req.params;
-    console.log("Username got", username);
+
     const startupProfile = await prisma.startupManager.findUnique({
       where: { Username: username },
-      select: { city: true, fullName: true ,shawon:true},
+      select: { city: true, fullName: true, shawon: true },
     });
     if (!startupProfile) {
       console.log("Not found");
@@ -139,21 +61,5 @@ router.get("/mystartups", async (req, res) => {
 });
 
 //getting notification
-router.get("/get-notifications", async (req, res) => {
-  const username = req.query.username;
-  try {
-    const notification = await prisma.notifications.findMany({
-      where: {
-        startupManagerUsername: username,
-      },
-    });
-
-    console.log(notification);
-    res.status(200).json({
-      notification,
-    });
-  } catch (error) {
-    console.log("the error is", error);
-  }
-});
+router.get("/get-notifications", notifications);
 module.exports = router;
