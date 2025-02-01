@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import "./sLogin.css";
 import { useContext } from "react";
-import StartupImage from "./startup.png";
-
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
 
-const SLogin = () => {
-  const { setIsLoggedIn, setUserType, isLoggedIn, setManagerUsername, socket } =
+const ManagerLogin = () => {
+  const { setIsLoggedIn, setUserType,  setManagerUsername, socket } =
     useContext(UserContext);
 
   const navigate = useNavigate();
@@ -40,7 +38,6 @@ const SLogin = () => {
     if (response.ok) {
       alert("Login Successful");
       setIsLoggedIn(true);
-      console.log("New isLoggedIn:", isLoggedIn);
       navigate("/startup/home");
       setUserType("startup");
       setManagerUsername(username);
@@ -54,9 +51,6 @@ const SLogin = () => {
     <>
       <div className="main-body">
         <div className="form-body">
-          {/* <div className="left">
-            <img className="login-pic" src={StartupImage} alt="abc" />
-          </div> */}
           <div className="right">
             <h1 className="form-heading">Stratup Manager Login</h1>
             <form className="login-form" onSubmit={handleSubmit}>
@@ -89,4 +83,4 @@ const SLogin = () => {
     </>
   );
 };
-export default SLogin;
+export default ManagerLogin;

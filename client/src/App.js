@@ -9,7 +9,6 @@ import NothingFound from "./components/NothingFound";
 import InvestorHome from "./components/InvestorHome";
 import DealRoom from "./components/DealRoom/DealRoom";
 import UserContext from "./contexts/userContext";
-import SLogin from "./components/StartupLogin/sLogin";
 import StartupHome from "./components/StartupHome/StartupHome";
 import StartupNavbar from "./components/NavBar/StartupNavbar";
 import StartupForm from "./components/StarupUpload/StartupForm";
@@ -20,6 +19,7 @@ import ChatRoom from "./components/ChatRoom/ChatRoom";
 import NotificationView from "./components/NotificationView/NotificationView";
 import InvestorNavbar from "./components/NavBar/InvestorNavbar";
 import ManagerRegistration from "./components/StartupManagerReg/ManagerRegistration";
+import ManagerLogin from "./components/StartupLogin/sLogin";
 
 const App = () => {
 	const { userType, isLoggedIn } = useContext(UserContext);
@@ -40,7 +40,7 @@ const App = () => {
 					<Route path="/signup" element={<Registration />} />
 					<Route path="/investor-home" element={<InvestorHome />} />
 					<Route path="/deal-room" element={<DealRoom />} />
-					<Route path="/startup/login" element={<SLogin />} />
+					<Route path="/startup/login" element={<ManagerLogin />} />
 					<Route path="startup/signup" element={<ManagerRegistration />} />
 					<Route path="startup/home" element={<StartupHome />} />
 					<Route path="startup/upload" element={<StartupForm />} />

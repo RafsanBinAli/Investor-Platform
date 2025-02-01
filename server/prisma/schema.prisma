@@ -15,12 +15,6 @@ model Investor {
   email          String
   password       String
   phone          String
-  DoB            DateTime
-  city           String
-  country        String
-  occupation     String
-  industry       String
-  investmentType String
   Schedule       Schedule[]
   Messages       Message[]
 
@@ -41,7 +35,6 @@ model StartupManager {
   Schedule      Schedule[]
   Messages      Message[]
   Conversation  Conversation[]
-
   role          String          @default("manager")
   Notifications Notifications[]
 }

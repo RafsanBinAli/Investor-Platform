@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-
 import "./Profile.css";
 import UserContext from "../../contexts/userContext";
+import { fetchUserData } from "../../api/manager"; 
 
 const Profile = () => {
   const { managerUsername } = useContext(UserContext);
@@ -14,32 +14,25 @@ const Profile = () => {
 
   useEffect(() => {
     const sendData = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/startup/home/${managerUsername}`
-      );
-      if (!response.ok) {
-        console.log("error", response.status);
+      const data = await fetchUserData(managerUsername);
+      if (data) {
+        setUserData(data);
       }
-
-      const data = await response.json();
-      console.log(data);
-      setUserData(data);
     };
 
-    sendData();
-
-    console.log(userData);
+    if (managerUsername) {
+      sendData();
+    }
   }, [managerUsername]);
+
   return (
     <>
       <div className="profile-holder">
         <div className="Profile">
           <div className="pic"></div>
           <div className="info">
-            <p className="p"> Username:{managerUsername}</p>
+            <p className="p"> Username: {managerUsername}</p>
             <p className="p"> Full Name: {userData.fullName}</p>
-            <p className="p"> City: {userData.city}</p>
-            <p className="p"> IsShawon: {userData.shawon}</p>
           </div>
         </div>
       </div>

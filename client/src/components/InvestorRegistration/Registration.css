@@ -31,3 +31,19 @@
 /* .investment-header {
 	flex: 1;
 } */
+.btn-regular {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+  }
+  
+  .btn-submitting {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: not-allowed;
+  }

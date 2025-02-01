@@ -1,20 +1,14 @@
-import React, { useState } from "react";
-import { ProgressBar } from "react-bootstrap";
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import Step3 from "./Step3";
-
+import { useState } from "react";
 import "../InvestorRegistration/Registration.css";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../api/investor";
 
 const Registration = () => {
-  const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    occupation: "",
-    industry: "",
-    investmentType: "",
-    DoB: "",
-    city: "",
-    country: "",
     Username: "",
     fullName: "",
     email: "",
@@ -23,23 +17,33 @@ const Registration = () => {
     NID: "",
   });
 
-  const nextStep = () => {
-    setStep(step + 1);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    updateFormData(name, value);
   };
 
-  const prevStep = () => {
-    setStep(step - 1);
-  };
+  const handleComplete = async (e) => {
+    try {
+      setIsSubmitting(true);
 
-  const getProgress = () => {
-    return `Step ${step} of 3`;
+      const response = await registerUser(formData);
+      if (response.success) {
+        alert("Registration successful!");
+        navigate("/login");
+      } else {
+        alert("Registration failed! " + response.error);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const updateFormData = (name, value) => {
-    const formattedValue = name === "DoB" ? new Date(value) : value;
     setFormData({
       ...formData,
-      [name]: formattedValue,
+      [name]: value,
     });
   };
 
@@ -50,31 +54,97 @@ const Registration = () => {
           <h1 className="head">
             <u>Investor Registration </u>
           </h1>
+          <div>
+            <form>
+              <div className="mb-3">
+                <label htmlFor="Username" className="form-label">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="usermame"
+                  name="Username"
+                  value={formData.Username}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="fullName" className="form-label">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="phone" className="form-label">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="NID" className="form-label">
+                  NID
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="NID"
+                  name="NID"
+                  value={formData.NID}
+                  onChange={handleChange}
+                />
+              </div>
 
-          {step === 1 && (
-            <Step1
-              formData={formData}
-              updateFormData={updateFormData}
-              onNext={nextStep}
-            />
-          )}
-          {step === 2 && (
-            <Step2
-              formData={formData}
-              updateFormData={updateFormData}
-              onNext={nextStep}
-              onBack={prevStep}
-            />
-          )}
-          {step === 3 && (
-            <Step3
-              formData={formData}
-              updateFormData={updateFormData}
-              onBack={prevStep}
-            />
-          )}
-          <br />
-          <ProgressBar now={(step / 3) * 100} label={getProgress()} />
+              <button
+                type="button"
+                className={isSubmitting ? "btn-submitting" : "btn-regular"}
+                onClick={handleComplete}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Complete Registration"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </>
