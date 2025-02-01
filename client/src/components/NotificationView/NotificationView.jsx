@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./NotificationView.css";
-import UserContext from "../../contexts/userContext";
 import Message from "./message.png";
 import Meeting from "./meeting.png";
 const NotificationView = () => {
   const [notifications, setnotifications] = useState([]);
-  const { managerUsername } = useContext(UserContext);
+  const managerUsername=localStorage.getItem('username')
   useEffect(() => {
     try {
       const fetchData = async () => {

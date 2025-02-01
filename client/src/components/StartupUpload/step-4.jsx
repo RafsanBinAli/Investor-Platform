@@ -5,7 +5,7 @@ import { uploadStartup } from "../../api/startupApi";
 
 const Step4s = ({ formData, updateFormData, onPrev }) => {
   const navigate = useNavigate();
-  const { managerUsername } = useContext(UserContext);
+  const managerUsername = localStorage.getItem("username");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,10 +15,18 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
   const handleComplete = async () => {
     // Check if all required fields are filled
     const requiredFields = [
-      "startupName", "industry", "foundingDate", "location", "initialFund",
-      "totalRevenue", "fundingNeeded", "goals", "motivation", "briefExplain"
+      "startupName",
+      "industry",
+      "foundingDate",
+      "location",
+      "initialFund",
+      "totalRevenue",
+      "fundingNeeded",
+      "goals",
+      "motivation",
+      "briefExplain",
     ];
-    const missingField = requiredFields.find(field => !formData[field]);
+    const missingField = requiredFields.find((field) => !formData[field]);
 
     if (missingField) {
       alert("Please fill in all required fields");
@@ -42,7 +50,9 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
         <h2>Step 4: Goals and Motivation</h2>
         <form>
           <div className="mb-3">
-            <label htmlFor="goals" className="form-label">Goals</label>
+            <label htmlFor="goals" className="form-label">
+              Goals
+            </label>
             <textarea
               className="form-control"
               id="goals"
@@ -53,7 +63,9 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label htmlFor="motivation" className="form-label">Motivation</label>
+            <label htmlFor="motivation" className="form-label">
+              Motivation
+            </label>
             <textarea
               className="form-control"
               id="motivation"
@@ -64,7 +76,9 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label htmlFor="briefExplain" className="form-label">Brief Explanation</label>
+            <label htmlFor="briefExplain" className="form-label">
+              Brief Explanation
+            </label>
             <textarea
               className="form-control"
               id="briefExplain"

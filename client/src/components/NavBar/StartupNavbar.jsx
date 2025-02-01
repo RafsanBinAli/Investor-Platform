@@ -42,7 +42,7 @@ const StartupNavbar = ({onLogout}) => {
           <li className="nav-item active">
             <Link
               className="nav-link logout-link"
-              to="/startup/login"
+              to="/"
               onClick={onLogout}
             >
               Logout

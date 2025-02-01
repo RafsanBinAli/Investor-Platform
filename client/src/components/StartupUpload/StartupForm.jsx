@@ -1,5 +1,4 @@
-// Import necessary React and Bootstrap components
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,10 +7,9 @@ import Step2s from "./step-2";
 import Step3s from "./step-3";
 import Step4s from "./step-4";
 import "./StartupForm.css";
-import UserContext from "../../contexts/userContext";
 
 const StartupForm = () => {
-  const { managerUsername } = useContext(UserContext);
+  const managerUsername = localStorage.getItem("username");
 
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
 
 const ManagerLogin = ({ onLogin }) => {
-  const { setIsLoggedIn, setUserType, setManagerUsername, socket } =
+  const {  socket } =
     useContext(UserContext);
 
   const navigate = useNavigate();

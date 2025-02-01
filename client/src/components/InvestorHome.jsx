@@ -6,7 +6,7 @@ function InvestorHome() {
   return (
     <>
       <div className="main-contain">
-        <Body/>
+        <Body />
       </div>
     </>
   );

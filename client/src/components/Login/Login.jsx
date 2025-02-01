@@ -1,11 +1,9 @@
-import React, { useState, useContext } from "react";
+import { useState } from "react";
 import "./Login.css";
 import { useNavigate, Link } from "react-router-dom";
-import UserContext from "../../contexts/userContext";
 import { loginUser } from "../../api/investor";
 
 const Login = ({ onLogin}) => {
-  const { setIsLoggedIn, setUserType, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

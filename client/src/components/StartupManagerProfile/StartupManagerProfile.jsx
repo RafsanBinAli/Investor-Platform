@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import UserContext from "../../contexts/userContext";
+import React, { useState, useEffect } from "react";
 
 const StartupManagerProfile = () => {
-  const { managerUsername } = useContext(UserContext);
+  const  managerUsername  = localStorage.getItem('username')
   const [userData, setUserData] = useState({
     city: "",
     Username: "",

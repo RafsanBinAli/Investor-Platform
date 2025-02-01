@@ -1,10 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import "./Profile.css";
-import UserContext from "../../contexts/userContext";
 import { fetchUserData } from "../../api/manager";
 
 const Profile = () => {
-  const { managerUsername } = useContext(UserContext);
+  const managerUsername = localStorage.getItem("username");
   const [userData, setUserData] = useState({
     Username: "",
     city: "",
