@@ -31,7 +31,7 @@ router.get("/home/:username", async (req, res) => {
 
     const startupProfile = await prisma.startupManager.findUnique({
       where: { Username: username },
-      select: { city: true, fullName: true, shawon: true },
+      select: {  fullName: true },
     });
     if (!startupProfile) {
       console.log("Not found");

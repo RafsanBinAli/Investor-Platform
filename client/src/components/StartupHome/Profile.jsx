@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import "./Profile.css";
 import UserContext from "../../contexts/userContext";
-import { fetchUserData } from "../../api/manager"; 
+import { fetchUserData } from "../../api/manager";
 
 const Profile = () => {
   const { managerUsername } = useContext(UserContext);
@@ -29,10 +29,22 @@ const Profile = () => {
     <>
       <div className="profile-holder">
         <div className="Profile">
-          <div className="pic"></div>
+          <img
+            className="rounded-circle"
+            width="150px"
+            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+            alt="User Profile"
+          />
+
           <div className="info">
-            <p className="p"> Username: {managerUsername}</p>
-            <p className="p"> Full Name: {userData.fullName}</p>
+            <p className="p">
+              <span className="label">Username:</span>{" "}
+              <span className="value">{managerUsername}</span>
+            </p>
+            <p className="p">
+              <span className="label">Full Name:</span>{" "}
+              <span className="value">{userData.fullName}</span>
+            </p>
           </div>
         </div>
       </div>

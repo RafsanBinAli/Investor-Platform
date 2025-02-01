@@ -16,3 +16,21 @@ export const fetchStartupData = async () => {
     return [];
   }
 };
+
+export const fetchUserStartups = async (managerUsername) => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/startup/mystartups?username=${managerUsername}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.startups || [];
+  } catch (error) {
+    console.error("Failed to fetch startups:", error);
+    return [];
+  }
+};

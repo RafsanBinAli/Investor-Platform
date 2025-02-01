@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "./startupBody.css";
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../../../contexts/userContext";
+import UserContext from "../../contexts/userContext";
 
 const StartupBody = ({}) => {
   const navigate = useNavigate();
@@ -60,14 +60,12 @@ const StartupBody = ({}) => {
               <h1 className="startupName-header">{startupInfo.startupName} </h1>
               <div className="button-holder">
                 <button className="btn btn-secondary a" onClick={handleClick}>
-                  {" "}
                   Go to Deal Room!
                 </button>
                 <button
                   className="btn btn-secondary a"
                   onClick={handleClickToChat}
                 >
-                  {" "}
                   Go to Chat Room!
                 </button>
               </div>

@@ -1,17 +1,133 @@
-.Body {
-	flex: 9;
-}
-
-.startup-holder {
-	margin-top: 5rem;
-	margin-left: 5rem;
-}
-.startup-header-h3 {
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 600;
-	font-size: 35px;
-}
-.mystartups {
-	margin-top: 3rem;
+/* ===== Global Styling ===== */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+  }
+  
+  /* ===== Main Container ===== */
+  .Body-home {
+	margin-top: 2%;
+	width: 100%;
 	display: flex;
-}
+	/* flex-direction: column; */
+	align-items: center;
+	padding: 3rem 2rem;
+	background: #ecf0f1; /* Light Gray */
+  }
+  
+  /* ===== Startup Section ===== */
+  .startup-holder {
+	max-width: 1200px;
+	text-align: center;
+  }
+  
+  .startup-header-h3 {
+	font-size: 2.2rem;
+	font-weight: bold;
+	color: #2c3e50; /* Dark Blue */
+	text-transform: uppercase;
+	margin-bottom: 2rem;
+  }
+  
+  /* ===== Startup Cards Grid ===== */
+  .mystartups {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	gap: 1.2rem;
+	justify-content: center;
+  }
+  
+  /* ===== Rectangular Card Styling ===== */
+  .startup-card {
+	background: #ffffff;
+	border-radius: 8px;
+	overflow: hidden;
+	border: 2px solid #2c3e50; /* Dark Blue Border */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease-in-out;
+	padding: 1.5rem;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 200px; /* Rectangular shape */
+  }
+  
+  .startup-card:hover {
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+	background: #2c3e50; /* Dark Blue */
+	color: #ffffff;
+  }
+  
+  /* ===== Card Content ===== */
+  .card-title {
+	font-size: 1.6rem;
+	font-weight: bold;
+  }
+  
+  .startup-founder,
+  .card-tin {
+	font-size: 1rem;
+	font-weight: 500;
+	margin-top: 0.3rem;
+  }
+  
+  /* ===== Button Styling ===== */
+  .details-button {
+	margin-top: auto;
+	background: #2c3e50;
+	color: #ffffff;
+	font-size: 1rem;
+	padding: 0.6rem 1.2rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	width: 100%;
+	text-align: center;
+  }
+  
+  .details-button:hover {
+	background: #1a252f; /* Darker Blue */
+  }
+  
+  /* ===== Loading and Empty State ===== */
+  .loading-text,
+  .nothing-found {
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: #888;
+	margin-top: 2rem;
+  }
+  
+  /* ===== Responsive Design ===== */
+  @media (max-width: 1024px) {
+	.startup-holder {
+	  width: 95%;
+	}
+  }
+  
+  @media (max-width: 768px) {
+	.startup-header-h3 {
+	  font-size: 2rem;
+	}
+	.mystartups {
+	  grid-template-columns: 1fr;
+	}
+  }
+  
+  @media (max-width: 480px) {
+	.startup-header-h3 {
+	  font-size: 1.8rem;
+	}
+	.card-title {
+	  font-size: 1.4rem;
+	}
+	.details-button {
+	  font-size: 0.9rem;
+	  padding: 0.5rem 1rem;
+	}
+  }
+  

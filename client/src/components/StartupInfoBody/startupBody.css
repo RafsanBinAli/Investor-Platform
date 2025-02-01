@@ -1,0 +1,214 @@
+/* General Styles */
+.startupbody {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #f4f4f4;
+	padding: 20px;
+  }
+  
+  /* Main container */
+  .abc {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	width: 80%;
+	max-width: 900px;
+  }
+  
+  /* Startup details section */
+  .startupDetails {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 20px;
+	width: 100%;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+	border-left: 6px solid #007bff;
+  }
+  
+  .upper-portion {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .startupName-header {
+	font-size: 24px;
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 10px;
+  }
+  
+ 
+  
+  .a {
+	background-color: #007bff;
+	color: #fff;
+  }
+  
+  .a:hover {
+	background-color: #0056b3;
+  }
+  
+  /* More startup details */
+  .startupDetails-more {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 15px;
+  }
+  
+  .individual {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 10px;
+	background: #f8f9fa;
+	border-radius: 6px;
+  }
+  
+  .labe {
+	font-weight: bold;
+	color: #333;
+  }
+  
+  .data {
+	color: #555;
+  }
+  
+  /* Funding Details */
+  .fundingDetails {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 20px;
+	width: 100%;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+	border-left: 6px solid #28a745;
+  }
+  
+  .fundingDetails-header {
+	font-size: 20px;
+	font-weight: bold;
+	color: #28a745;
+	margin-bottom: 10px;
+  }
+  
+  .fund {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 10px;
+	background: #f8f9fa;
+	border-radius: 6px;
+  }
+  
+  .fund .labe {
+	font-weight: bold;
+  }
+  
+  .fund .data {
+	color: #555;
+  }
+
+ /* General button styles */
+button {
+	padding: 12px 18px;
+	font-size: 16px;
+	font-weight: 600;
+	border-radius: 50px; /* Rounded edges for a more modern look */
+	border: 2px solid transparent; /* Border for active state */
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	width: auto;
+	text-transform: uppercase; /* Make text all caps */
+	letter-spacing: 1px; /* Slight letter spacing for style */
+  }
+  
+  /* Gradient background for primary button */
+  button.a {
+	background: linear-gradient(45deg, #ff6a00, #ee0979); /* Gradient color */
+	color: white;
+	border-radius: 8px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+	border: none;
+  }
+  
+  button.a:hover {
+	background: linear-gradient(45deg, #ee0979, #ff6a00); /* Reverse the gradient on hover */
+	transform: translateY(-4px); /* Slight lift on hover */
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
+  }
+  
+  button.a:active {
+	background: linear-gradient(45deg, #ff6a00, #ee0979); /* Keep the gradient consistent */
+	transform: translateY(2px); /* Slight shrink when clicked */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow on click */
+  }
+  
+  /* Secondary button style */
+  button.btn-secondary.a {
+	background-color: #3498db; /* Stylish blue for the secondary button */
+	color: white;
+	border-radius: 8px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+	border: none;
+	width: 40%;
+  }
+  
+  button.btn-secondary.a:hover {
+	background-color: #2980b9; /* Darker blue on hover */
+	transform: translateY(-4px); /* Lift effect */
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  }
+  
+  button.btn-secondary.a:active {
+	background-color: #2980b9;
+	transform: translateY(2px); /* Slight shrink on click */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  }
+  
+  /* Disabled button state */
+  button:disabled {
+	background-color: #d6d6d6;
+	color: #b0b0b0;
+	cursor: not-allowed;
+	box-shadow: none;
+  }
+  
+  /* Responsive button adjustments */
+  @media (max-width: 768px) {
+	button {
+	  width: 100%;
+	  font-size: 14px;
+	}
+  }
+  
+  /* Responsive button adjustments */
+  @media (max-width: 768px) {
+	button {
+	  width: 100%;
+	  font-size: 14px;
+	}
+  }
+  
+  
+  @media (max-width: 768px) {
+	.abc {
+	  width: 95%;
+	}
+  
+	.upper-portion {
+	  flex-direction: column;
+	  gap: 10px;
+	}
+  
+	.button-holder {
+	  flex-direction: column;
+	  width: 100%;
+	}
+  
+	button {
+	  width: 100%;
+	}
+  }
+  

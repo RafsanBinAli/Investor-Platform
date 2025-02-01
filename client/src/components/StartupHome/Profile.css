@@ -1,36 +1,54 @@
 .profile-holder {
-	border-right: solid 1px;
-	flex: 3;
-}
-.Profile {
-	height: 600px;
-	width: auto;
-	background-color: rgb(247, 255, 255);
-	margin: 2rem;
-	border: solid 1px;
+	border-right: solid 1px #ccc;
+	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add your shadow values here */
-}
-
-.pic {
-	background-color: rgb(139, 206, 206);
-	width: 55%;
-	height: 45%;
-	margin-top: 3rem;
-	margin-left: 15%;
-}
-.chobi {
+	padding: 2rem;
+  }
+  
+  .Profile {
+	height: auto;
+	width: 350px;
+	background-color: rgb(247, 255, 255);
+	padding: 2rem;
+	border: solid 1px #ccc;
+	border-radius: 10px;
+	text-align: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Profile img {
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
 	object-fit: cover;
-}
-.info {
-	width: 60%;
-	height: 40%;
-	margin-top: 2rem;
-	margin-left: 15%;
-}
-.p {
+	border: solid 3px #8bcece;
+	margin-bottom: 1rem;
+  }
+  
+  .info {
+	margin-top: 1rem;
+	text-align: left;
+  }
+  
+  .p {
 	color: black;
-	font-weight: bolder;
+	font-size: 1.1rem;
 	font-family: "Times New Roman", Times, serif;
-}
+	margin: 0.5rem 0;
+  }
+  
+  .label {
+	font-weight: bold;
+	font-size: 1.2rem;
+	color: #2c3e50;
+	text-transform: uppercase;
+  }
+  
+  .value {
+	font-weight: normal;
+	font-size: 1.1rem;
+	color: #34495e;
+	font-style: italic;
+  }
+  

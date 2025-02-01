@@ -17,7 +17,6 @@ model Investor {
   phone          String
   Schedule       Schedule[]
   Messages       Message[]
-
   Conversation Conversation[]
   role         String         @default("investor")
 
