@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
 
-const ManagerLogin = () => {
-  const { setIsLoggedIn, setUserType,  setManagerUsername, socket } =
+const ManagerLogin = ({ onLogin }) => {
+  const { setIsLoggedIn, setUserType, setManagerUsername, socket } =
     useContext(UserContext);
 
   const navigate = useNavigate();
@@ -24,24 +24,32 @@ const ManagerLogin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/startup/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/startup/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      }
+    );
 
     if (response.ok) {
       alert("Login Successful");
-      setIsLoggedIn(true);
-      navigate("/startup/home");
-      setUserType("startup");
-      setManagerUsername(username);
+
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userType", "manager");
+      localStorage.setItem("username", username);
+
+      onLogin("manager", username);
+
       socket.emit("authenticate", username);
+
+      navigate("/startup/home");
     } else {
       console.error("Server returned an error:", response.status);
     }

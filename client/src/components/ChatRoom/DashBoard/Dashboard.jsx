@@ -16,6 +16,7 @@ const Dashboard = ({ handlePerson }) => {
   const handleShowConvo = (person) => {
     handlePerson(person);
   };
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,7 +58,6 @@ const Dashboard = ({ handlePerson }) => {
 
         <div className="message-dash">
           <h5 className="message-dash-header">
-            {" "}
             <u>Recent Messages:</u>
           </h5>
           {conversationNames.map((person) => (

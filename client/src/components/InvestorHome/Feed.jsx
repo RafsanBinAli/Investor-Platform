@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import IndustryFilter from '../IndustryFilter';
-import StartupList from '../StartupList';
-import { useStartupData } from '../../../hooks/useStartupData';
+import IndustryFilter from './IndustryFilter';
+import StartupList from './StartupList';
+import { useStartupData } from '../../hooks/useStartupData';
 import './Feed.css';
 
 const Feed = ({ startupName }) => {

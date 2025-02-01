@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Body = () => {
   const [startups, setStartups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { managerUsername } = useContext(UserContext);
+  const managerUsername= localStorage.getItem('username')
 
   const navigate = useNavigate();
 

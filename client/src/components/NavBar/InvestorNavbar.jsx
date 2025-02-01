@@ -1,17 +1,7 @@
 import { Link } from "react-router-dom";
 import "./InvestorNavbar.css";
-import { useContext } from "react";
-import UserContext from "../../contexts/userContext";
 
-
-const InvestorNavbar = () => {
-	const {setIsLoggedIn,setUserType}=useContext(UserContext);
- 
-	const handleLogout=()=>{
-		setIsLoggedIn(false);
-		setUserType(" ");
-    
-	}
+const InvestorNavbar = ({ onLogout }) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -45,9 +35,9 @@ const InvestorNavbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-nav ml-auto"> {/* Added a new div for the right-aligned items */}
+        <div className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <Link className="nav-link logout-link" to="/login" onClick={handleLogout} >   {/* Adjust the link path accordingly */}
+            <Link className="nav-link logout-link" to="/" onClick={onLogout}>
               Logout
             </Link>
           </li>

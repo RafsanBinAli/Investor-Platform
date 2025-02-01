@@ -1,42 +1,125 @@
-
-
-.navbar-nav .nav-item {
-	margin-right: 20px; /* Adjust the right margin as needed */
-	transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
-}
-
-.navbar-nav .nav-item:hover {
-	transform: scale(1.1); /* Increase size on hover */
-}
-.navbar-brand {
-	margin-right: 60rem;
-	font-size: 25px;
-	font-weight: bold;
-}
-
-.navbar-nav.ml-auto {
-	margin-right: 70px;
-}
-.navbar-nav.ml-auto .logout-link {
-	font-weight: 550 !important;
-}
-
-.navbar-nav .nav-item .nav-link {
-	font-size: 20px; /* Adjust the font size of the list items as needed */
-	font-weight: 500;
-	transition: transform 0.3s ease-in-out;
-}
-
+/* InvestorNavbar.css */
 .navbar {
-	height: 80px; /* Adjust the height as needed */
-}
-
-@media (max-width: 768px) {
-	.navbar-brand {
-		margin-right: 2rem; /* Adjust margin for smaller screens */
+	padding: 1rem 2rem;
+	background: linear-gradient(to right, #1a1a2e, #16213e) !important;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-brand {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #fff !important;
+	padding: 0.5rem 1rem;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+  }
+  
+  .navbar-brand:hover {
+	background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar-nav {
+	margin-left: 2rem;
+  }
+  
+  .nav-item {
+	margin: 0 0.5rem;
+	position: relative;
+  }
+  
+  .nav-link {
+	color: rgba(255, 255, 255, 0.9) !important;
+	font-weight: 500;
+	padding: 0.5rem 1rem !important;
+	border-radius: 6px;
+	transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+	background: rgba(255, 255, 255, 0.1);
+	transform: translateY(-1px);
+  }
+  
+  .nav-link::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 2px;
+	background: #4f46e5;
+	transition: all 0.3s ease;
+	transform: translateX(-50%);
+  }
+  
+  .nav-link:hover::after {
+	width: 80%;
+  }
+  
+  /* Active link styling */
+  .nav-item.active .nav-link {
+	color: #fff !important;
+	background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Logout button specific styling */
+  .logout-link {
+	color: #ff4d4d !important;
+	border: 1px solid rgba(255, 77, 77, 0.3);
+	margin-left: 1rem;
+  }
+  
+  .logout-link:hover {
+	background: rgba(255, 77, 77, 0.1);
+	border-color: #ff4d4d;
+  }
+  
+  /* Mobile navbar toggle button */
+  .navbar-toggler {
+	border: none;
+	padding: 0.5rem;
+	border-radius: 6px;
+	background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar-toggler:focus {
+	outline: none;
+	box-shadow: none;
+  }
+  
+  .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 991px) {
+	.navbar-nav {
+	  margin-left: 0;
+	  padding: 1rem 0;
 	}
-
-	.navbar-nav .nav-item .nav-link {
-		font-size: 16px; /* Decrease font size for smaller screens */
+	
+	.nav-item {
+	  margin: 0.5rem 0;
 	}
-}
+	
+	.logout-link {
+	  margin: 0.5rem 0;
+	}
+  
+	.navbar-collapse {
+	  background: linear-gradient(to right, #1a1a2e, #16213e);
+	  padding: 1rem;
+	  border-radius: 8px;
+	  margin-top: 1rem;
+	}
+  }
+  
+  /* Right-aligned items */
+  .ml-auto {
+	margin-left: auto !important;
+  }
+  
+  /* Add smooth transition for collapsing menu */
+  .navbar-collapse {
+	transition: all 0.3s ease;
+  }

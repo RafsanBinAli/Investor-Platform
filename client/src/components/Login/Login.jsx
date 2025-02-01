@@ -3,9 +3,8 @@ import "./Login.css";
 import { useNavigate, Link } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
 import { loginUser } from "../../api/investor";
-const imageUrl = "https://i.ibb.co.com/tprVXDRX/investor.jpg";
 
-const Login = () => {
+const Login = ({ onLogin}) => {
   const { setIsLoggedIn, setUserType, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -17,10 +16,16 @@ const Login = () => {
     const result = await loginUser(username, password);
 
     if (result.success) {
+      // Save user data to localStorage
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userType', 'investor');
+      localStorage.setItem('username', username);
+      
+      // Update state
+      onLogin("investor", username);
+      
+      // Show success message and navigate
       alert("Login Successful");
-      setIsLoggedIn(true);
-      setUserType("investor");
-      setUser(username);
       navigate("/investor-home");
     } else {
       alert("Login Failed: " + result.error);

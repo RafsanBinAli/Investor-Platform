@@ -1,26 +1,7 @@
-import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import UserContext from "../../contexts/userContext";
 import "./StartupNavbar.css";
 
-const StartupNavbar = () => {
-  const {
-    setIsLoggedIn,
-    setManagerUsername,
-
-    socket,
-  } = useContext(UserContext);
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setManagerUsername("");
-  };
-
-  useEffect(() => {
-    socket.on("valoni", (data) => {
-      console.log("at last");
-    });
-  });
+const StartupNavbar = ({onLogout}) => {
 
   return (
     <>
@@ -62,7 +43,7 @@ const StartupNavbar = () => {
             <Link
               className="nav-link logout-link"
               to="/startup/login"
-              onClick={handleLogout}
+              onClick={onLogout}
             >
               Logout
             </Link>

@@ -1,17 +1,16 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./InvestorProfile.css";
-import UserContext from "../../contexts/userContext";
 import useUserProfile from "../../hooks/useUserProfile";
 
 const InvestorProfile = () => {
-  const { username } = useContext(UserContext);
-  const { userData, saveUserProfile, fetchUserData } = useUserProfile(username);
+  const username = localStorage.getItem('username');
+  const { userData, saveUserProfile } = useUserProfile(username);
 
   const [updatedUserData, setUpdatedUserData] = useState(userData);
 
   useEffect(() => {
     if (userData) {
-      setUpdatedUserData(userData); 
+      setUpdatedUserData(userData);
     }
   }, [userData]);
 
@@ -42,7 +41,9 @@ const InvestorProfile = () => {
               src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               alt="user-profile"
             />
-            <span className="font-weight-bold">{updatedUserData?.Username}</span>
+            <span className="font-weight-bold">
+              {updatedUserData?.Username}
+            </span>
             <span className="text-black-50">{updatedUserData?.email}</span>
           </div>
         </div>

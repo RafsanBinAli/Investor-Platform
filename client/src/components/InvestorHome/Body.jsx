@@ -1,5 +1,5 @@
-import Feed from "../Feed/Feed";
-import RightBar from "../RightBar/RightBar";
+import Feed from "./Feed";
+import RightBar from "./RightBar/RightBar";
 import { useState } from "react";
 
 const Body = () => {

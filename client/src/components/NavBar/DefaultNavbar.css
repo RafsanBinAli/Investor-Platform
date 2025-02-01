@@ -1,20 +1,76 @@
-.navbar-link{
-  color:rgb(4, 27, 26) !important;
-  text-decoration:solid;
-  margin-right: 40px;
-  font-weight: bold;
-  font-size: large;
-  margin-top: 10px;
-  transition: color 0.3s ease !important;
-  
+/* DefaultNavbar.css */
+.default-navigation-bar {
+  background-color: #f5f5f5 !important;
+  padding: 1rem 2rem !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-.navbar-link:hover {
-    color: rgb(141, 187, 54) !important;
-  }
-  .title{
-    margin-left: 3rem;
-  }
 
-  .navigation-bar{
-    background-color: rgb(245, 245, 245);
+.default-title {
+  color: #333333 !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.default-title:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+.default-navbar-link {
+  color: #555555 !important;
+  font-weight: 500 !important;
+  margin: 0 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+}
+
+.default-navbar-link:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #333333 !important;
+}
+
+.default-navbar-link::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 2px !important;
+  background: #666666 !important;
+  transition: all 0.3s ease !important;
+  transform: translateX(-50%) !important;
+}
+
+.default-navbar-link:hover::after {
+  width: 80% !important;
+}
+
+/* Mobile toggle button */
+.default-navigation-bar .navbar-toggler {
+  border: none !important;
+  padding: 0.5rem !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+.default-navigation-bar .navbar-toggler:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Mobile menu */
+@media (max-width: 991px) {
+  .default-navigation-bar .navbar-collapse {
+    background: #f5f5f5 !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    margin-top: 1rem !important;
   }
+  
+  .default-navbar-link {
+    margin: 0.5rem 0 !important;
+  }
+}
