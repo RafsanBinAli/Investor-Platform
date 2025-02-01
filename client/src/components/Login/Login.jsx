@@ -1,83 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Login.css";
-import { useContext } from "react";
-import InvestorImage from "./investor.jpg";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
+import { loginUser } from "../../api/investor";
+const imageUrl = "https://i.ibb.co.com/tprVXDRX/investor.jpg";
 
 const Login = () => {
-  
   const { setIsLoggedIn, setUserType, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleChangeUsername = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Username: username,
-        password: password,
-      }),
-    });
+    const result = await loginUser(username, password);
 
-
-    if (response.ok) {
+    if (result.success) {
       alert("Login Successful");
-
       setIsLoggedIn(true);
-
       setUserType("investor");
-      navigate("/investor-home");
       setUser(username);
+      navigate("/investor-home");
     } else {
-      console.error("Server returned an error:", response.status);
+      alert("Login Failed: " + result.error);
     }
   };
 
   return (
-    <>
-      <div className="main-body">
+    <div className="main-body">
+      <div className="form-body-container">
         <div className="form-body">
-          <div className="left">
-            <img className="login-pic" src={InvestorImage} alt="abc" />
-          </div>
+          {/* <div className="left">
+            <img className="login-pic" src={imageUrl} alt="Investor Login" />
+          </div> */}
           <div className="right">
             <h1 className="form-heading">Investor Login</h1>
             <form className="login-form" onSubmit={handleSubmit}>
               <input
                 type="text"
-                name="Username"
                 placeholder="Username"
-                onChange={handleChangeUsername}
+                onChange={(e) => setUsername(e.target.value)}
               />
-
               <input
                 type="password"
-                name="Password"
-                placeholder="password"
-                onChange={handlePasswordChange}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
               />
-
-              <button type="submit"> Login</button>
+              <button type="submit">Login</button>
             </form>
-
             <div className="new">
-              <div className="no-account"> Don't have any account?</div>
+              <div className="no-account">Don't have an account?</div>
               <div className="open">
                 <Link to="/signup">New Account</Link>
               </div>
@@ -85,7 +58,8 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
+
 export default Login;

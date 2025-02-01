@@ -18,7 +18,7 @@ router.post("/signup", signup);
 router.post("/login", login);
 
 //showing the startup at investor Homepage
-router.get("/investor-home", allStartups);
+router.get("/all-startups", allStartups);
 
 //getting startup info using tinNumber
 router.get("/startup-info/:tinNumber", async (req, res) => {
