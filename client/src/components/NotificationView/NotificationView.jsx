@@ -10,7 +10,7 @@ const NotificationView = () => {
     try {
       const fetchData = async () => {
         const response = await fetch(
-          `http://localhost:4000/startup/get-notifications?username=${managerUsername}`
+         `${process.env.REACT_APP_BACKEND_URL}/startup/get-notifications?username=${managerUsername}`
         );
         const data = await response.json();
         setnotifications(data.notification);

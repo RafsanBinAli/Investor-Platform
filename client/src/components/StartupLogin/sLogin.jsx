@@ -26,7 +26,7 @@ const SLogin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:4000/startup/login", {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/startup/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,9 +54,9 @@ const SLogin = () => {
     <>
       <div className="main-body">
         <div className="form-body">
-          <div className="left">
+          {/* <div className="left">
             <img className="login-pic" src={StartupImage} alt="abc" />
-          </div>
+          </div> */}
           <div className="right">
             <h1 className="form-heading">Stratup Manager Login</h1>
             <form className="login-form" onSubmit={handleSubmit}>

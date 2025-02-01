@@ -19,7 +19,7 @@ const ChatRoom = () => {
     try {
       const fetchData = async () => {
         if (messagePartner.length === 0) {
-          const response = await fetch(`http://localhost:4000/create-convo`, {
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/create-convo`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

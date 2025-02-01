@@ -21,7 +21,7 @@ const StartupManagerProfile = () => {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/startup/manager-profile?username=${managerUsername}`
+          `${process.env.REACT_APP_BACKEND_URL}/startup/manager-profile?username=${managerUsername}`
         );
         const data = await response.json();
         setUserData(data.startupManager);
@@ -43,7 +43,7 @@ const StartupManagerProfile = () => {
   const handleSaveProfile = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4000/update-investor-profile`,
+        `${process.env.REACT_APP_BACKEND_URL}/update-investor-profile`,
         {
           method: "PUT",
           headers: {

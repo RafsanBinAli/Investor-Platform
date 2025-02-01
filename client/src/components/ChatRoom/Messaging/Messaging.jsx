@@ -46,7 +46,7 @@ const Messaging = ({ messagePartner }) => {
         const fetchData = async () => {
           try {
             const response = await fetch(
-              `http://localhost:4000/message-retriving?convoID=${id}`
+              `${process.env.REACT_APP_BACKEND_URL}/message-retriving?convoID=${id}`
             );
 
             if (response.ok) {
@@ -107,7 +107,7 @@ const Messaging = ({ messagePartner }) => {
     const receiver = messagePartner.name;
     if (newMessage !== "") {
       try {
-        const response = await fetch(`http://localhost:4000/send-message`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/send-message`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

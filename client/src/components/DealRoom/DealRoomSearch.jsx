@@ -17,7 +17,7 @@ const DealRoomSearch = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/meeting-searched/${startupCode}`
+          `${process.env.REACT_APP_BACKEND_URL}/meeting-searched/${startupCode}`
         );
         const data = await response.json();
         setMeetingData(data);
@@ -35,7 +35,7 @@ const DealRoomSearch = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:4000/meeting-searched/${code}`
+        `${process.env.REACT_APP_BACKEND_URL}/meeting-searched/${code}`
       );
       if (response.ok) {
         alert("Meeting Found !");

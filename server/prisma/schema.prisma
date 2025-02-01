@@ -37,10 +37,6 @@ model StartupManager {
   email         String
   password      String
   phone         String
-  major         String
-  expertArea    String
-  highestDegree String
-  city          String
   startups      startupInfo[]
   Schedule      Schedule[]
   Messages      Message[]
@@ -48,7 +44,6 @@ model StartupManager {
 
   role          String          @default("manager")
   Notifications Notifications[]
-  shawon        String?
 }
 
 model startupInfo {

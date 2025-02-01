@@ -9,7 +9,7 @@ const Body = () => {
     try {
       const fetchData = async () => {
         const response = await fetch(
-          `http://localhost:4000/startup/mystartups?username=${managerUsername}`
+          `${process.env.REACT_APP_BACKEND_URL}/startup/mystartups?username=${managerUsername}`
         );
         const data = await response.json();
         console.log(data.startups);

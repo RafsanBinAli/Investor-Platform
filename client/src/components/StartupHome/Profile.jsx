@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     const sendData = async () => {
       const response = await fetch(
-        `http://localhost:4000/startup/home/${managerUsername}`
+        `${process.env.REACT_APP_BACKEND_URL}/startup/home/${managerUsername}`
       );
       if (!response.ok) {
         console.log("error", response.status);

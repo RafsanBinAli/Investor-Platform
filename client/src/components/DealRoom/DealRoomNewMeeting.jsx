@@ -21,7 +21,7 @@ const DealRoomNewMeeting = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/set-meeting/${username}`,
+        `${process.env.REACT_APP_BACKEND_URL}/set-meeting/${username}`,
         {
           method: "POST",
           headers: {
@@ -51,7 +51,7 @@ const DealRoomNewMeeting = () => {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `http://localhost:4000/get-managerName?tinNumber=${meeting.tinNumber}`
+            `${process.env.REACT_APP_BACKEND_URL}/get-managerName?tinNumber=${meeting.tinNumber}`
           );
           const receiver = await response.json();
           const receiverName = receiver.managerUsername;

@@ -19,7 +19,7 @@ const StartupPortfolio = () => {
   useEffect(() => {
     const sendData = async () => {
       const response = await fetch(
-        `http://localhost:4000/startup/profile/${tinNumber}`
+        `${process.env.REACT_APP_BACKEND_URL}/startup/profile/${tinNumber}`
       );
       const data = await response.json();
       if (!response.ok) {

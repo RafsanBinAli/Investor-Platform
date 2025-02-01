@@ -25,7 +25,7 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
       alert("Please fill in all required fields");
       return;
     }
-    const response = await fetch("http://localhost:4000/startup/upload", {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/startup/upload`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

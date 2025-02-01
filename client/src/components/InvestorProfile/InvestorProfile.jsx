@@ -22,7 +22,7 @@ const InvestorProfile = () => {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/investor-profile?username=${username}`
+          `${process.env.REACT_APP_BACKEND_URL}/investor-profile?username=${username}`
         );
         const data = await response.json();
         setUserData(data.investor);
@@ -44,7 +44,7 @@ const InvestorProfile = () => {
   const handleSaveProfile = async () => {
     try {
       const response = await fetch(
-        `http://localhost:4000/update-investor-profile`,
+        `${process.env.REACT_APP_BACKEND_URL}/update-investor-profile`,
         {
           method: "PUT",
           headers: {

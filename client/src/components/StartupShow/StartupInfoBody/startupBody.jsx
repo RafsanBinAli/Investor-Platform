@@ -30,7 +30,7 @@ const StartupBody = ({}) => {
   useEffect(() => {
     const sendData = async () => {
       const response = await fetch(
-        `http://localhost:4000/startup-info/${tinNumber}`
+        `${process.env.REACT_APP_BACKEND_URL}/startup-info/${tinNumber}`
       );
       const data = await response.json();
       if (!response.ok) {

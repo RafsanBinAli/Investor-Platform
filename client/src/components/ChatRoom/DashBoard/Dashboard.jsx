@@ -21,7 +21,7 @@ const Dashboard = ({ handlePerson }) => {
       try {
         console.log("In FetchData");
         const response = await fetch(
-          `http://localhost:4000/conversations?username=${senderUsername}`
+          `${process.env.REACT_APP_BACKEND_URL}/conversations?username=${senderUsername}`
         );
 
         if (response.ok) {
