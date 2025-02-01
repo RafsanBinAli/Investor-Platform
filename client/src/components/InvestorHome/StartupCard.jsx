@@ -7,6 +7,7 @@ const StartupCard = ({ startup, onViewDetails }) => {
 
   const handleClick = () => {
     setIsAnimating(true);
+    console.log("CLicked")
     onViewDetails(startup.tinNumber);
   };
 

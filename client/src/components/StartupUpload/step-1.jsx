@@ -31,7 +31,7 @@ const Step1s = ({ formData, updateFormData, onNext }) => {
             className="form-select"
             id="industry"
             name="industry"
-            value={formData.industry}
+            value={formData.industry || "Tech"}
             onChange={handleChange}
             required
           >
@@ -43,7 +43,7 @@ const Step1s = ({ formData, updateFormData, onNext }) => {
         </div>
         <div className="mb-3">
           <label htmlFor="foundingDate" className="form-label">
-            Founding Date
+            Founding Date (dd/mm/yyyy)
           </label>
           <input
             type="text"

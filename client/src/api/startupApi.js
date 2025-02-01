@@ -34,3 +34,25 @@ export const fetchUserStartups = async (managerUsername) => {
     return [];
   }
 };
+
+
+export const uploadStartup = async (formData, managerUsername) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/startup/upload`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, startupManagerUsername: managerUsername }),
+    });
+
+    if (!response.ok) {
+      const { message } = await response.json();
+      return { success: false, error: message || "Error uploading data" };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error during API call:", error);
+    return { success: false, error: "Network or server error" };
+  }
+};
+

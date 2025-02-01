@@ -1,67 +1,48 @@
 import { useContext } from "react";
 import UserContext from "../../contexts/userContext";
 import { useNavigate } from "react-router-dom";
+import { uploadStartup } from "../../api/startupApi";
 
 const Step4s = ({ formData, updateFormData, onPrev }) => {
   const navigate = useNavigate();
+  const { managerUsername } = useContext(UserContext);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     updateFormData(name, value);
   };
-  const { managerUsername } = useContext(UserContext);
-  const handleComplete = async (e) => {
-    if (
-      !formData.startupName ||
-      !formData.industry ||
-      !formData.foundingDate ||
-      !formData.location ||
-      !formData.initialFund ||
-      !formData.totalRevenue ||
-      !formData.fundingNeeded ||
-      !formData.goals ||
-      !formData.motivation ||
-      !formData.briefExplain
-    ) {
+
+  const handleComplete = async () => {
+    // Check if all required fields are filled
+    const requiredFields = [
+      "startupName", "industry", "foundingDate", "location", "initialFund",
+      "totalRevenue", "fundingNeeded", "goals", "motivation", "briefExplain"
+    ];
+    const missingField = requiredFields.find(field => !formData[field]);
+
+    if (missingField) {
       alert("Please fill in all required fields");
       return;
     }
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/startup/upload`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        startupName: formData.startupName,
-        industry: formData.industry,
-        foundingDate: formData.foundingDate,
-        location: formData.location,
-        tinNumber: formData.tinNumber,
-        cofounderName: formData.cofounderName,
-        coOccupation: formData.coOccupation,
-        NID: formData.NID,
-        initialFund: formData.initialFund,
-        totalRevenue: formData.totalRevenue,
-        fundingNeeded: formData.fundingNeeded,
-        goals: formData.goals,
-        motivation: formData.motivation,
-        briefExplain: formData.briefExplain,
-        startupManagerUsername: managerUsername,
-      }),
-    });
-    if (response.ok) {
+
+    // Call the API function for uploading the startup
+    const { success, error } = await uploadStartup(formData, managerUsername);
+
+    if (success) {
       alert("Successfully uploaded!");
       navigate("/startup/home");
+    } else {
+      alert(error);
     }
   };
+
   return (
     <>
       <div>
         <h2>Step 4: Goals and Motivation</h2>
         <form>
           <div className="mb-3">
-            <label htmlFor="goals" className="form-label">
-              Goals
-            </label>
+            <label htmlFor="goals" className="form-label">Goals</label>
             <textarea
               className="form-control"
               id="goals"
@@ -72,9 +53,7 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label htmlFor="Motivation" className="form-label">
-              Motivation
-            </label>
+            <label htmlFor="motivation" className="form-label">Motivation</label>
             <textarea
               className="form-control"
               id="motivation"
@@ -85,9 +64,7 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label htmlFor="briefExplain" className="form-label">
-              Brief Explannation
-            </label>
+            <label htmlFor="briefExplain" className="form-label">Brief Explanation</label>
             <textarea
               className="form-control"
               id="briefExplain"
@@ -95,7 +72,7 @@ const Step4s = ({ formData, updateFormData, onPrev }) => {
               value={formData.briefExplain}
               onChange={handleChange}
               rows="4"
-              column="6"
+              columns="6"
             ></textarea>
           </div>
 

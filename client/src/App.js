@@ -11,7 +11,7 @@ import DealRoom from "./components/DealRoom/DealRoom";
 import UserContext from "./contexts/userContext";
 import StartupHome from "./pages/StartupHome";
 import StartupNavbar from "./components/NavBar/StartupNavbar";
-import StartupForm from "./components/StarupUpload/StartupForm";
+import StartupForm from "./components/StartupUpload/StartupForm";
 import InvestorProfile from "./components/InvestorProfile/InvestorProfile";
 import StartupManagerProfile from "./components/StartupManagerProfile/StartupManagerProfile";
 import ChatRoom from "./components/ChatRoom/ChatRoom";

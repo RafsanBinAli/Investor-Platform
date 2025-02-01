@@ -22,7 +22,6 @@ const StartupForm = () => {
     tinNumber: "",
     cofounderName: "",
     coOccupation: "",
-    NID: "",
     initialFund: "",
     totalRevenue: "",
     fundingNeeded: "",

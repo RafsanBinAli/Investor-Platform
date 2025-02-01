@@ -1,0 +1,125 @@
+/* NothingFound.css */
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: 2rem;
+    background-color: #f9fafb;
+  }
+  
+  .not-found-content {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .not-found-icon {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .search-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    border: 6px solid #e5e7eb;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .search-line {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 6px;
+    height: 24px;
+    background: #e5e7eb;
+    transform: rotate(45deg);
+    border-radius: 4px;
+  }
+  
+  .cross-left, 
+  .cross-right {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 6px;
+    background: #ef4444;
+    border-radius: 4px;
+    transform-origin: center;
+  }
+  
+  .cross-left {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .cross-right {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  .not-found-title {
+    color: #1f2937;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  
+  .not-found-message {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Hover effects */
+  .not-found-content:hover .search-circle {
+    border-color: #d1d5db;
+  }
+  
+  .not-found-content:hover .search-line {
+    background: #d1d5db;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 480px) {
+    .not-found-container {
+      padding: 1rem;
+    }
+  
+    .not-found-content {
+      padding: 1.5rem;
+    }
+  
+    .not-found-icon {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .not-found-title {
+      font-size: 1.5rem;
+    }
+  
+    .not-found-message {
+      font-size: 0.875rem;
+    }
+  }

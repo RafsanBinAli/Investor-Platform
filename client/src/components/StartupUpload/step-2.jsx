@@ -36,20 +36,6 @@ const Step2s = ({ formData, updateFormData, onNext, onPrev }) => {
             />
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="NID" className="form-label">
-              NID
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="NID"
-              name="NID"
-              value={formData.NID}
-              onChange={handleChange}
-            />
-          </div>
-
           <button type="button" className="btn btn-secondary" onClick={onPrev}>
             Back
           </button>
