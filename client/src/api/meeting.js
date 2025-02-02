@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 export const setMeeting = async (username, meetingData) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/set-meeting/${username}`,
+      `${BASE_URL}/meeting/set/${username}`,
       {
         method: "POST",
         headers: {
@@ -35,25 +35,11 @@ export const setMeeting = async (username, meetingData) => {
   }
 };
 
-export const getManagerName = async (tinNumber) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/get-managerName?tinNumber=${tinNumber}`
-    );
-    const data = await response.json();
-    return { success: true, data };
-  } catch (error) {
-    return {
-      success: false,
-      message: "Error finding manager name"
-    };
-  }
-};
 
 
 export const searchMeetings = async (code) => {
   try {
-    const response = await fetch(`${BASE_URL}/meeting-searched/${code}`);
+    const response = await fetch(`${BASE_URL}/meeting/search/${code}`);
     const data = await response.json();
     
     return { 

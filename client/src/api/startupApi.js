@@ -2,7 +2,7 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const fetchStartupInfo = async (tinNumber) => {
   try {
-    const response = await fetch(`${BASE_URL}/startup-info/${tinNumber}`);
+    const response = await fetch(`${BASE_URL}/startup/info/${tinNumber}`);
 
     const data = await response.json();
 

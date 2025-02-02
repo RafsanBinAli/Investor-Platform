@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 export const fetchUserData = async (managerUsername) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/startup/home/${managerUsername}`
+      `${BASE_URL}/startup/data/${managerUsername}`
     );
     if (!response.ok) {
       console.log("Error:", response.status);

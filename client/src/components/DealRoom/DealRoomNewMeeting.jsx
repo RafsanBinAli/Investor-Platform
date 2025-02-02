@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { setMeeting, getManagerName } from "../../api/meeting";
+import { setMeeting } from "../../api/meeting";
 import "./DealRoomNewMeeting.css";
 
 const DealRoomNewMeeting = () => {
@@ -34,11 +34,6 @@ const DealRoomNewMeeting = () => {
       return;
     }
 
-    // Get manager name
-    const managerResult = await getManagerName(meeting.tinNumber);
-    if (!managerResult.success) {
-      console.log("Error finding manager name");
-    }
 
     // Reset form and show success message
     alert("Successfully updated");

@@ -48,7 +48,7 @@ export const loginUser = async (username, password) => {
 export const fetchUserData = async (username) => {
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/investor-profile?username=${username}`
+      `${process.env.REACT_APP_BACKEND_URL}/profile?username=${username}`
     );
     const data = await response.json();
     return data.investor;
@@ -61,7 +61,7 @@ export const fetchUserData = async (username) => {
 export const saveUserProfile = async (username, userData) => {
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/update-investor-profile`,
+      `${process.env.REACT_APP_BACKEND_URL}/update/profile`,
       {
         method: "PUT",
         headers: {
