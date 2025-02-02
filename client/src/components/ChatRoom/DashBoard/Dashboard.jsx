@@ -1,22 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import "./Dashboard.css";
 import InvestorImage from "./investor.jpg";
-import UserContext from "../../../contexts/userContext";
 
 const Dashboard = ({ handlePerson }) => {
-  const { userType, username, managerUsername } = useContext(UserContext);
+  const senderUsername = localStorage.getItem("username");
+  const userType = localStorage.getItem("userType");
   const [conversationNames, setConversationNames] = useState([]);
 
-  var senderUsername;
-  if (userType === "investor") {
-    senderUsername = username;
-  } else if (userType === "startup") {
-    senderUsername = managerUsername;
-  }
   const handleShowConvo = (person) => {
     handlePerson(person);
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {

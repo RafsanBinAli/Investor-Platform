@@ -4,10 +4,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
+import { loginUser } from "../../api/investor";
+import { loginManager } from "../../api/manager";
 
 const ManagerLogin = ({ onLogin }) => {
-  const {  socket } =
-    useContext(UserContext);
+  const { socket } = useContext(UserContext);
 
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -24,26 +25,14 @@ const ManagerLogin = ({ onLogin }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/startup/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      }
-    );
-
-    if (response.ok) {
+    const result = await loginManager(username, password);
+    if (result.success) {
       alert("Login Successful");
 
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userType", "manager");
       localStorage.setItem("username", username);
+      localStorage.setItem('auth_token',result.token)
 
       onLogin("manager", username);
 
@@ -51,7 +40,7 @@ const ManagerLogin = ({ onLogin }) => {
 
       navigate("/startup/home");
     } else {
-      console.error("Server returned an error:", response.status);
+      alert("Login Failed: " + result.error);
     }
   };
 

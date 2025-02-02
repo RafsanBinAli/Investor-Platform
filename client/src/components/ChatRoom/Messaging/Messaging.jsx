@@ -3,21 +3,21 @@ import "./Messaging.css";
 import Send from "./send.png";
 
 import UserContext from "../../../contexts/userContext";
+import { fetchMessages, sendMessage } from "../../../api/message";
 
 const Messaging = ({ messagePartner }) => {
   const [newMessage, setNewMessage] = useState("");
-  const { userType, username, managerUsername, socket, chatManagerName } =
-    useContext(UserContext);
   const [allMessage, setAllMessage] = useState([]);
-  var senderUsername;
+
+  const { socket } = useContext(UserContext);
+
+  const userType = localStorage.getItem("userType");
+  const username = localStorage.getItem("username");
+
+  var senderUsername = username;
   var receiverUsername = messagePartner.name;
 
   // Check the userType and set the sender accordingly
-  if (userType === "investor") {
-    senderUsername = username;
-  } else if (userType === "startup") {
-    senderUsername = managerUsername;
-  }
 
   var sender = senderUsername;
   if (userType === "investor") {
@@ -38,52 +38,28 @@ const Messaging = ({ messagePartner }) => {
   }, [allMessage]);
 
   useEffect(() => {
-    // Check if messagePartner is defined and has an id
     if (messagePartner && messagePartner.id !== undefined) {
-      const id = messagePartner.id;
+      const loadMessages = async () => {
+        const result = await fetchMessages(messagePartner.id);
+        if (result.success) {
+          setAllMessage(result.data);
+        } else {
+          console.log("Error loading messages:", result.error);
+        }
+      };
 
-      try {
-        const fetchData = async () => {
-          try {
-            const response = await fetch(
-              `${process.env.REACT_APP_BACKEND_URL}/message-retriving?convoID=${id}`
-            );
-
-            if (response.ok) {
-              const data = await response.json();
-              setAllMessage(data);
-            } else {
-              console.log(
-                "Error fetching messages:",
-                response.status,
-                await response.text()
-              );
-            }
-          } catch (error) {
-            console.error("Error during fetch:", error);
-          }
-        };
-
-        fetchData();
-      } catch (error) {
-        console.log("Error retrieving messages:", error);
-      }
-    } else {
-      console.log("Invalid message partner or ID");
+      loadMessages();
     }
   }, [messagePartner]);
 
   useEffect(() => {
     if (messagePartner && messagePartner.id !== undefined) {
       // Authenticate the user
-      const sender = userType === "investor" ? username : managerUsername;
+      const sender = username;
       socket.emit("authenticate", sender);
 
       // Listen for server-relayed messages
       socket.on("serverMessage", ({ sender, content }) => {
-        console.log(
-          `Received server-relayed message from ${sender}: ${content}`
-        );
         // Update your state or perform any other actions with the received message
         setAllMessage((prevMessages) => {
           const newMessages = [
@@ -101,51 +77,30 @@ const Messaging = ({ messagePartner }) => {
         // Disconnect the Socket.IO connection
       };
     }
-  }, [messagePartner, userType, username, managerUsername]);
+  }, [messagePartner, userType, username]);
 
-  const sendMessage = async () => {
-    const receiver = messagePartner.name;
+  const handleSendMessage = async () => {
     if (newMessage !== "") {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/send-message`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            content: newMessage,
-            senderUsername: senderUsername,
-            receiverUsername: receiverUsername,
-          }),
+      
+      const result = await sendMessage(newMessage, senderUsername, receiverUsername);
+
+      if (result.success) {
+        setAllMessage((prevMessages) => [
+          ...prevMessages,
+          { sender, content: newMessage, private: true },
+        ]);
+
+        socket.emit("clientMessage", {
+          sender: sender,
+          receiver: messagePartner.name,
+          content: newMessage,
         });
-
-        if (!response.ok) {
-          console.log("there is problem with sending message");
-        } else {
-          console.log("this is new message", newMessage);
-
-          setAllMessage((prevMessages) => [
-            ...prevMessages,
-            { sender, content: newMessage, private: true },
-          ]);
-
-          socket.emit("clientMessage", {
-            sender: sender,
-            receiver: receiver,
-            content: newMessage,
-          });
-          console.log("Message emitted successfully:", {
-            sender: sender,
-            receiver: receiver,
-            content: newMessage,
-          });
-        }
-      } catch (error) {
-        console.log("sending problem");
+      } else {
+        console.log("Failed to send message:", result.error);
       }
+      
+      setNewMessage("");
     }
-
-    setNewMessage("");
   };
   useEffect(() => {
     const handlePrivateMessage = ({ sender, content }) => {
@@ -157,7 +112,6 @@ const Messaging = ({ messagePartner }) => {
         ...prevMessages,
         { sender, content, private: true },
       ]);
-      console.log("State updated:", allMessage);
     };
 
     // Set up listener for incoming private messages
@@ -210,7 +164,7 @@ const Messaging = ({ messagePartner }) => {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         />
-        <div className="search-icon" onClick={sendMessage}>
+        <div className="search-icon" onClick={handleSendMessage}>
           <img src={Send} className="send" alt="Send" />
         </div>
       </div>

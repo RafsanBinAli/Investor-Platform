@@ -14,10 +14,13 @@ const Login = ({ onLogin}) => {
     const result = await loginUser(username, password);
 
     if (result.success) {
+      
       // Save user data to localStorage
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('userType', 'investor');
       localStorage.setItem('username', username);
+      localStorage.setItem('auth_token',result.token)
+      
       
       // Update state
       onLogin("investor", username);

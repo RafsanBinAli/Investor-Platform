@@ -14,8 +14,9 @@ export const loginUser = async (username, password) => {
       if (!response.ok) {
         throw new Error(`Server returned an error: ${response.status}`);
       }
+      const data = await response.json();
   
-      return { success: true };
+      return { success: true, token: data.token };
     } catch (error) {
       console.error("Login error:", error);
       return { success: false, error: error.message };

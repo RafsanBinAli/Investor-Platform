@@ -6,8 +6,9 @@ import UserContext from "../../contexts/userContext";
 
 const ChatRoom = () => {
   const [messagePartner, setMessagePartner] = useState([]);
-  const { username, chatManagerName } =
+  const { chatManagerName } =
     useContext(UserContext);
+    const username= localStorage.getItem('username')
 
   const handlePerson = (person) => {
     setMessagePartner(person);
