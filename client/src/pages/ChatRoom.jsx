@@ -1,8 +1,7 @@
-import Dashboard from "./DashBoard/Dashboard";
-import Messaging from "./Messaging/Messaging";
-import "./ChatRoom.css";
+import Dashboard from "../components/ChatRoom/DashBoard/Dashboard";
+import Messaging from "../components/ChatRoom/Messaging/Messaging";
 import { useState, useEffect } from "react";
-import { createConversation } from "../../api/message"; // Import the function
+import { createConversation } from "../api/message"; // Import the function
 import { useLocation } from "react-router-dom";
 
 const ChatRoom = () => {
@@ -20,7 +19,7 @@ const ChatRoom = () => {
       if (messagePartner.length === 0) {
         if (chatManagerName) {
           await createConversation(chatManagerName);
-          setIsConversationCreated(true); // Mark conversation as created
+          setIsConversationCreated(true); 
         }
       }
     };

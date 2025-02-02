@@ -1,11 +1,11 @@
 import { useRef, useContext, useState, useEffect } from "react";
 import "./Messaging.css";
-import Send from "./send.png";
-
 import UserContext from "../../../contexts/userContext";
 import { fetchMessages, sendMessage } from "../../../api/message";
 
 const Messaging = ({ messagePartner }) => {
+
+  const Send="https://i.ibb.co.com/FbKzLSyY/send.png" ;
   const [newMessage, setNewMessage] = useState("");
   const [allMessage, setAllMessage] = useState([]);
 

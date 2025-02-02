@@ -40,3 +40,8 @@ form input[type="text"] {
 	font-family: "Arial", sans-serif;
 	font-size: 18px;
 }
+
+.main-container{
+    display: flex;
+    width: 100%;
+}

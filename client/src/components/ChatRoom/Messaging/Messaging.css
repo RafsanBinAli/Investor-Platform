@@ -98,3 +98,8 @@
 	overflow: auto;
 	padding: 2rem;
 }
+
+.chatroom{
+    width: 100%;
+    display: flex;
+}

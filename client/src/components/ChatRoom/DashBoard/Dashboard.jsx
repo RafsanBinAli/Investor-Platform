@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
-import InvestorImage from "./investor.jpg";
 import { getConversations } from "../../../api/message";
 
 const Dashboard = ({ handlePerson, isConversationCreated }) => {
+  const InvestorImage="https://i.ibb.co.com/tprVXDRX/investor.jpg" ;
   const senderUsername = localStorage.getItem("username");
   const userType = localStorage.getItem("userType");
   const [conversationNames, setConversationNames] = useState([]);
@@ -24,7 +24,7 @@ const Dashboard = ({ handlePerson, isConversationCreated }) => {
     };
 
     fetchData();
-  }, [ isConversationCreated]); // Refetch when isConversationCreated changes
+  }, [ isConversationCreated,senderUsername]);
 
   return (
     <div className="dashboard">
