@@ -59,3 +59,52 @@ exports.allStartups = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.startupInfo = async (req, res) => {
+  try {
+    const { tinNumber } = req.params;
+    const startupInfo = await prisma.startupInfo.findUnique({
+      where: { tinNumber: tinNumber },
+    });
+    if (!startupInfo) {
+      console.log("Not Found");
+    }
+    res.status(200).json(startupInfo);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.myStartups = async (req, res) => {
+  try {
+    const managerUsername = req.query.username;
+    const startups = await prisma.startupInfo.findMany({
+      where: { startupManagerUsername: managerUsername },
+    });
+    if (!startups) {
+      console.log("No startups");
+    }
+    res.status(200).json({ startups });
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+exports.startupProfileByUsername= async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    const startupProfile = await prisma.startupManager.findUnique({
+      where: { Username: username },
+      select: {  fullName: true },
+    });
+    if (!startupProfile) {
+      console.log("Not found");
+    }
+
+    res.status(200).json(startupProfile);
+  } catch (error) {
+    console.error("Error retrieving startup manager data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
