@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
@@ -19,6 +24,10 @@ import ManagerRegistration from "./components/StartupManagerRegistration/Manager
 import ManagerLogin from "./components/StartupLogin/ManagerLogin";
 import StartupInfo from "./pages/StartupInfo";
 import { useEffect, useState } from "react";
+import {
+  PrivateRouteAuthenticated,
+  PrivateRouteUnauthenticated,
+} from "./components/PrivateRoute";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +44,6 @@ const App = () => {
     setUsername(username || "");
   }, []);
 
-  // Add this function to update both localStorage and state
   const handleLogin = (type, username) => {
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userType", type);
@@ -55,36 +63,87 @@ const App = () => {
     setUserType("");
     setUsername("");
   };
-  return (
-    <>
-      <Router>
-        {isLoggedIn && userType === "investor" ? (
-          <InvestorNavbar onLogout={handleLogout} username={username} />
-        ) : isLoggedIn && userType === "manager" ? (
-          <StartupNavbar onLogout={handleLogout} username={username} />
-        ) : (
-          <DefaultNavbar />
-        )}
 
-        <Routes>
-          <Route path="/" element={<Home />} />
+  return (
+    <Router>
+      {isLoggedIn && userType === "investor" ? (
+        <InvestorNavbar onLogout={handleLogout} username={username} />
+      ) : isLoggedIn && userType === "manager" ? (
+        <StartupNavbar onLogout={handleLogout} username={username} />
+      ) : (
+        <DefaultNavbar />
+      )}
+
+      <Routes>
+
+        <Route
+          element={
+            <PrivateRouteUnauthenticated
+              isAuthenticated={isLoggedIn}
+              userType={userType}
+            />
+          }
+        >
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/signup" element={<Registration />} />
+          <Route
+            path="/startup/login"
+            element={<ManagerLogin onLogin={handleLogin} />}
+          />
+          <Route path="/startup/signup" element={<ManagerRegistration />} />
+        </Route>
+
+        {/* Public route */}
+        <Route path="/" element={<Home />} />
+
+        {/* Investor routes */}
+        <Route
+          element={
+            <PrivateRouteAuthenticated 
+              isAuthenticated={isLoggedIn} 
+              userType={userType}
+            />
+          }
+        >
           <Route path="/investor-home" element={<InvestorHome />} />
           <Route path="/deal-room" element={<DealRoom />} />
-          <Route path="/startup/login"  element={<ManagerLogin onLogin={handleLogin} />}  />
-          <Route path="startup/signup" element={<ManagerRegistration />} />
-          <Route path="startup/home" element={<StartupHome />} />
-          <Route path="startup/upload" element={<StartupForm />} />
-          <Route path="/startup-info/:tinNumber" element={<StartupInfo />} />
           <Route path="/investor-profile" element={<InvestorProfile />} />
+        </Route>
+
+        {/* Startup routes */}
+        <Route
+          element={
+            <PrivateRouteAuthenticated 
+              isAuthenticated={isLoggedIn} 
+              userType={userType}
+            />
+          }
+        >
+          <Route path="/startup/home" element={<StartupHome />} />
+          <Route path="/startup/upload" element={<StartupForm />} />
           <Route path="/startup/profile" element={<StartupManagerProfile />} />
+        </Route>
+
+        {/* Common authenticated routes */}
+        <Route
+          element={
+            <PrivateRouteAuthenticated 
+              isAuthenticated={isLoggedIn} 
+              userType={userType}
+            />
+          }
+        >
+          <Route path="/startup-info/:tinNumber" element={<StartupInfo />} />
           <Route path="/chat-room" element={<ChatRoom />} />
           <Route path="/notifications" element={<NotificationView />} />
-          <Route path="*" element={<NothingFound />} />
-        </Routes>
-      </Router>
-    </>
+        </Route>
+
+
+        {/* Catch-all route */}
+        <Route path="*" element={<NothingFound />} />
+      </Routes>
+    </Router>
   );
 };
+
 export default App;
