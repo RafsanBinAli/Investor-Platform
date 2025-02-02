@@ -1,117 +1,139 @@
 /* styles.css */
 body {
-	margin: 0;
-	padding: 0;
-	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  color: #2d3748;
 }
 
 .top {
-  
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
-  height: 150vh;
 }
 
 .Home-main {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  gap: 4rem;
   position: relative;
 }
+
+.lekha {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Home-heading {
+  margin-bottom: 2rem;
+}
+
+.header {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1a202c;
+  line-height: 1.2;
+  margin: 0;
+  background: linear-gradient(to right, #2d3748, #4a5568);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.More-heading {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 3rem;
+}
+
 .background-image {
-  margin-top: 7rem;
+  flex: 1;
+  min-width: 300px;
+  height: 500px;
   background-image: url("https://i.ibb.co/DP0GnTQz/Snapshot-2025-01-29-23-10-04.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 50%;
-  height: 450px;
-  
+  transition: transform 0.3s ease;
 }
 
-.lekha {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  
-  margin-top: 7rem;
-  /* You can adjust the margin-top as needed */
-  font-size: 24px;
-  color: rgb(20, 1, 1);
-}
-
-/* Add the following styles to adjust the positioning */
-.Home-main .lekha {
-	margin-top: 7rem;
-}
-
-nav {
-	background-color: #292b2e; /* Customize the navbar background color */
-	color: white;
-	padding: 30px;
-	text-align: center;
-}
-ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: flex;
-	justify-content: center;
-}
-
-li {
-	margin: 0 30px;
-	cursor: pointer;
-	font-size: 22px;
-	font-weight: 600;
-}
-.header {
-	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-	font-size: 55px;
-}
-
-.Home-heading {
-	margin-left: 100px;
-}
-.More-heading {
-	margin-top: 5rem;
-	margin: 5rem;
-	font-size: 18px;
-}
-.join-header {
-	padding: 20px;
-	margin-left: 5rem;
-	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-	font-weight: 600;
-}
-.button {
-	margin-left: 7rem;
-	gap: 2px;
+.background-image:hover {
+  transform: scale(1.02);
 }
 
 .join {
-  position: absolute; /* Position the element absolutely */
-  top: 100%; /* Position the element below its parent */
-  left: 20%; /* Center the element horizontally */
-  transform: translate(-50%, -50%); /* Center the element vertically */
-  margin-top: 2rem; /* Add some top margin to avoid overlapping */
- 
-  font-size: 24px;
-  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to bottom, transparent, #f8f9fa);
 }
+
+.join-header {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 2rem;
+}
+
+.button {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .join-button {
-  padding: 10px 20px;
-  background-color: #435f75; /* Green background color */
+  padding: 1rem 2rem;
+  min-width: 200px;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: white;
+  background: linear-gradient(to right, #4f46e5, #6366f1);
   border: none;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 5px; /* Rounded corners */
-  transition: opacity 0.3s ease-in-out; /* Smooth opacity transition */
-  margin-right: 40px;
-  width: 300px;
-  
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.1);
 }
 
 .join-button:hover {
-  background-color: #011802; /* Darker green background color on hover */
-  opacity: 0.8; /* Reduce opacity on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(79, 70, 229, 0.2);
+  background: linear-gradient(to right, #4338ca, #4f46e5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Home-main {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .header {
+    font-size: 2.5rem;
+  }
+
+  .background-image {
+    height: 300px;
+  }
+
+  .join {
+    padding: 2rem 1rem;
+  }
+
+  .button {
+    gap: 1rem;
+  }
+
+  .join-button {
+    width: 100%;
+    max-width: 300px;
+  }
 }
