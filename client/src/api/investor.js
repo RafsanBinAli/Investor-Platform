@@ -43,8 +43,7 @@ export const loginUser = async (username, password) => {
       return { success: false, error: error.message };
     }
   };
-  
-  // src/api.js
+
 
 export const fetchUserData = async (username) => {
   try {

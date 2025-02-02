@@ -1,28 +1,69 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const PrivateRouteAuthenticated = ({ isAuthenticated, userType }) => {
-  if (!isAuthenticated) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [authState, setAuthState] = useState({
+    isAuthenticated: isAuthenticated,
+    userType: userType
+  });
+
+  useEffect(() => {
+    // Check localStorage directly
+    const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const storedUserType = localStorage.getItem('userType');
+
+    setAuthState({
+      isAuthenticated: storedIsLoggedIn,
+      userType: storedUserType
+    });
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return null; // or a loading spinner
+  }
+
+  if (!authState.isAuthenticated) {
     return <Navigate to="/" />;
   }
-  
-  // Both user types can access their respective routes
+
   return <Outlet />;
 };
 
 const PrivateRouteUnauthenticated = ({ isAuthenticated, userType }) => {
-  if (!isAuthenticated) {
-    // If not logged in, allow access to auth routes
+  const [isLoading, setIsLoading] = useState(true);
+  const [authState, setAuthState] = useState({
+    isAuthenticated: isAuthenticated,
+    userType: userType
+  });
+
+  useEffect(() => {
+    // Check localStorage directly
+    const storedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const storedUserType = localStorage.getItem('userType');
+
+    setAuthState({
+      isAuthenticated: storedIsLoggedIn,
+      userType: storedUserType
+    });
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return null; // or a loading spinner
+  }
+
+  if (!authState.isAuthenticated) {
     return <Outlet />;
   }
-  
-  // If logged in, redirect based on userType
-  if (userType === "investor") {
+
+  if (authState.userType === "investor") {
     return <Navigate to="/investor-home" />;
-  } else if (userType === "manager") {
+  } else if (authState.userType === "manager") {
     return <Navigate to="/startup/home" />;
   }
-  
-  // Fallback
+
   return <Navigate to="/" />;
 };
 

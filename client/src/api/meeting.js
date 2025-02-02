@@ -49,3 +49,24 @@ export const getManagerName = async (tinNumber) => {
     };
   }
 };
+
+
+export const searchMeetings = async (code) => {
+  try {
+    const response = await fetch(`${BASE_URL}/meeting-searched/${code}`);
+    const data = await response.json();
+    
+    return { 
+      success: response.ok,
+      data: data,
+      message: response.ok ? "Meeting Found!" : "No Meeting!"
+    };
+  } catch (error) {
+    console.error("Error searching meetings:", error);
+    return { 
+      success: false, 
+      error: error.message,
+      message: "Error searching for meetings" 
+    };
+  }
+};

@@ -1,6 +1,5 @@
-// src/hooks/useUserProfile.js
-
 import { useState, useEffect } from "react";
+import { fetchUserData, saveUserProfile } from "../api/investor";
 
 const useUserProfile = (username) => {
   const [userData, setUserData] = useState({
@@ -17,46 +16,35 @@ const useUserProfile = (username) => {
     investmentType: "",
   });
 
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/investor-profile?username=${username}`
-      );
-      const data = await response.json();
-      setUserData(data.investor);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
+  const loadUserData = async () => {
+    if (username) {
+      try {
+        const data = await fetchUserData(username);
+        if (data) {
+          setUserData(data);
+        }
+      } catch (error) {
+        console.error("Error loading user data:", error);
+      }
     }
   };
 
-  const saveUserProfile = async (updatedData) => {
+  const handleSaveProfile = async (updatedData) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/update-investor-profile`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, ...updatedData }),
-        }
-      );
-
-      if (!response.ok) {
-        console.error("Failed to update profile:", response.status);
-      }
+      await saveUserProfile(username, updatedData);
+      await loadUserData(); // Reload data after successful update
+      return true;
     } catch (error) {
-      console.error("Error updating profile:", error);
+      console.error("Error saving profile:", error);
+      return false;
     }
   };
 
   useEffect(() => {
-    if (username) {
-      fetchUserData();
-    }
+    loadUserData();
   }, [username]);
 
-  return { userData, saveUserProfile };
+  return { userData, saveUserProfile: handleSaveProfile };
 };
 
 export default useUserProfile;

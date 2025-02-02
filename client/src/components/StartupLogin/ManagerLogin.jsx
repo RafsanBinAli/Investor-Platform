@@ -31,7 +31,7 @@ const ManagerLogin = ({ onLogin }) => {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userType", "manager");
       localStorage.setItem("username", username);
-      localStorage.setItem('auth_token',result.token)
+      localStorage.setItem("auth_token", result.token);
 
       onLogin("manager", username);
 

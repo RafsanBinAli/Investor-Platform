@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { fetchManagerProfile, updateManagerProfile } from "../../api/manager";
 
 const StartupManagerProfile = () => {
-  const  managerUsername  = localStorage.getItem('username')
+  const managerUsername = localStorage.getItem("username");
   const [userData, setUserData] = useState({
-    city: "",
     Username: "",
     fullName: "",
     email: "",
@@ -16,20 +16,17 @@ const StartupManagerProfile = () => {
   });
 
   useEffect(() => {
-    console.log("Fetching user data for username:", managerUsername);
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/startup/manager-profile?username=${managerUsername}`
-        );
-        const data = await response.json();
-        setUserData(data.startupManager);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+    const loadManagerProfile = async () => {
+      const result = await fetchManagerProfile(managerUsername);
+      if (result.success) {
+        setUserData(result.data);
+      } else {
+        console.error("Failed to load profile:", result.error);
+        // Optionally show error to user
       }
     };
 
-    fetchUserData();
+    loadManagerProfile();
   }, [managerUsername]);
 
   const handleInputChange = (e, field) => {
@@ -40,25 +37,11 @@ const StartupManagerProfile = () => {
   };
 
   const handleSaveProfile = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/update-investor-profile`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ managerUsername, ...userData }),
-        }
-      );
-      console.log(response);
-      if (response.ok) {
-        console.log("Profile updated successfully!");
-      } else {
-        console.error("Failed to update profile:", response.status);
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
+    const result = await updateManagerProfile(managerUsername, userData);
+    if (result.success) {
+      alert("Profile updated successfully!");
+    } else {
+      alert("Failed to update profile: " + result.error);
     }
   };
 
@@ -121,17 +104,6 @@ const StartupManagerProfile = () => {
                   value={userData.NID}
                   placeholder="surname"
                   onChange={(e) => handleInputChange(e, "NID")}
-                />
-              </div>
-
-              <div className="col-md-6">
-                <label className="labels">City</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={userData.city}
-                  placeholder="surname"
-                  onChange={(e) => handleInputChange(e, "city")}
                 />
               </div>
             </div>

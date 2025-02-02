@@ -1,8 +1,25 @@
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
+export const fetchStartupInfo = async (tinNumber) => {
+  try {
+    const response = await fetch(`${BASE_URL}/startup-info/${tinNumber}`);
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.log("error status", response.status);
+      return { success: false, error: response.status };
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error("Error fetching startup info:", error);
+    return { success: false, error: error.message };
+  }
+};
 export const fetchStartupData = async () => {
   try {
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/all-startups`
-    );
+    const response = await fetch(`${BASE_URL}/all-startups`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -20,7 +37,7 @@ export const fetchStartupData = async () => {
 export const fetchUserStartups = async (managerUsername) => {
   try {
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/startup/mystartups?username=${managerUsername}`
+      `${BASE_URL}/startup/mystartups?username=${managerUsername}`
     );
 
     if (!response.ok) {
@@ -35,13 +52,15 @@ export const fetchUserStartups = async (managerUsername) => {
   }
 };
 
-
 export const uploadStartup = async (formData, managerUsername) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/startup/upload`, {
+    const response = await fetch(`${BASE_URL}/startup/upload`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...formData, startupManagerUsername: managerUsername }),
+      body: JSON.stringify({
+        ...formData,
+        startupManagerUsername: managerUsername,
+      }),
     });
 
     if (!response.ok) {
@@ -55,4 +74,3 @@ export const uploadStartup = async (formData, managerUsername) => {
     return { success: false, error: "Network or server error" };
   }
 };
-
