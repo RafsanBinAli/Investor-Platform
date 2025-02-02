@@ -5,7 +5,7 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 export const fetchMessages = async (conversationId) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/message-retriving?convoID=${conversationId}`
+      `${BASE_URL}/conversation/message-retrive?convoID=${conversationId}`
     );
     
     if (response.ok) {
@@ -69,12 +69,9 @@ export const getConversations = async (username) => {
           name: otherParty
         };
       });
-
-      // Return the data with the conversations containing ids and names
       return { success: true, data: conversations };
     } else if (response.status === 404) {
-      // If no conversations are found, return an empty array
-      return { success: true, data: [] }; // No conversations found
+      return { success: true, data: [] };
     } else {
       const errorData = await response.text();
       return { success: false, error: errorData }; // Handle other errors
