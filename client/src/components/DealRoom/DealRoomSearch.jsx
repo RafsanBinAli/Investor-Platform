@@ -1,5 +1,4 @@
 import "./DealRoomSearch.css";
-
 import MeetingDetails from "./MeetingDeatils";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/userContext";
@@ -56,7 +55,6 @@ const DealRoomSearch = () => {
         <div className="search-contain">
           <div className="searh-header">
             <h1 className="headerh1">
-              {" "}
               Search to know if a meeting was already fixed!{" "}
             </h1>
           </div>

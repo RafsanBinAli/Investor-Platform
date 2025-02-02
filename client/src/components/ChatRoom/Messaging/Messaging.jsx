@@ -1,11 +1,11 @@
 import { useRef, useContext, useState, useEffect } from "react";
-import "./Messaging.css";
 import UserContext from "../../../contexts/userContext";
 import { fetchMessages, sendMessage } from "../../../api/message";
+import { IMAGES } from "../../../constants/images";
+import "./Messaging.css";
 
 const Messaging = ({ messagePartner }) => {
 
-  const Send="https://i.ibb.co.com/FbKzLSyY/send.png" ;
   const [newMessage, setNewMessage] = useState("");
   const [allMessage, setAllMessage] = useState([]);
 
@@ -165,7 +165,7 @@ const Messaging = ({ messagePartner }) => {
           onChange={(e) => setNewMessage(e.target.value)}
         />
         <div className="search-icon" onClick={handleSendMessage}>
-          <img src={Send} className="send" alt="Send" />
+          <img src={IMAGES.Send} className="send" alt="Send" />
         </div>
       </div>
     </div>

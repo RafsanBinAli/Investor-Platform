@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import UserContext from "../../contexts/userContext";
 import { useNavigate } from "react-router-dom";
 import { uploadStartup } from "../../api/startupApi";
 

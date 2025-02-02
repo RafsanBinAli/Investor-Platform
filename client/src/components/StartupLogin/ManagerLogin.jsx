@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/userContext";
-import { loginUser } from "../../api/investor";
 import { loginManager } from "../../api/manager";
 
 const ManagerLogin = ({ onLogin }) => {

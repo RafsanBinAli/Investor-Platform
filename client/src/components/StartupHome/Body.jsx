@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import "./Body.css";
-import UserContext from "../../contexts/userContext";
 import { fetchUserStartups } from "../../api/startupApi";
 import { useNavigate } from "react-router-dom";
 

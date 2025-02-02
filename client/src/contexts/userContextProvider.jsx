@@ -3,11 +3,7 @@ import UserContext from "./userContext";
 import io from "socket.io-client";
 
 const UserContextProvider = ({ children }) => {
-  const [userType, setUserType] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
   const [tinNumber, setTinNumber] = useState("");
-  const [managerUsername, setManagerUsername] = useState("");
   const [socketInstance, setSocketInstance] = useState(null);
   const [chatManagerName, setChatManagerName] = useState("");
 
@@ -27,16 +23,9 @@ const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        userType,
-        setUserType,
-        isLoggedIn,
-        setIsLoggedIn,
-        username,
-        setUser: setUsername,
         startupCode: tinNumber,
         setStartupCode: setTinNumber,
-        managerUsername,
-        setManagerUsername,
+
         socket: socketInstance,
         chatManagerName,
         setChatManagerName,

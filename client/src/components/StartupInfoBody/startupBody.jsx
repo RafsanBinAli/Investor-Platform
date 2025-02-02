@@ -1,11 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "./startupBody.css";
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../../contexts/userContext";
+import {  useEffect, useState } from "react";
 
 const StartupBody = ({}) => {
   const navigate = useNavigate();
-  const { setStartupCode } = useContext(UserContext);
 
   const [startupInfo, setStartupInfo] = useState({
     startupName: "",
@@ -43,7 +41,6 @@ const StartupBody = ({}) => {
   }, [tinNumber]);
 
   const handleClick = () => {
-    setStartupCode(tinNumber);
     navigate("/deal-room");
   };
   const handleClickToChat = () => {

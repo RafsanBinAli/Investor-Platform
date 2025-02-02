@@ -1,33 +1,48 @@
 import { useEffect, useState } from "react";
+import { fetchNotifications } from "../../api/notification";
+import { formatDate, formatTime } from "../../utils/dateFormatters";
+import { IMAGES } from "../../constants/images";
 import "./NotificationView.css";
-import Message from "./message.png";
-import Meeting from "./meeting.png";
-const NotificationView = () => {
-  const [notifications, setnotifications] = useState([]);
-  const managerUsername=localStorage.getItem('username')
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const response = await fetch(
-         `${process.env.REACT_APP_BACKEND_URL}/startup/get-notifications?username=${managerUsername}`
-        );
-        const data = await response.json();
-        setnotifications(data.notification);
-      };
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    }
-  }, [managerUsername]);
-  function formatDate(dateTimeString) {
-    const date = new Date(dateTimeString);
-    return date.toLocaleDateString();
-  }
 
-  function formatTime(dateTimeString) {
-    const date = new Date(dateTimeString);
-    return date.toLocaleTimeString();
-  }
+const NotificationView = () => {
+  const [notifications, setNotifications] = useState([]);
+  const managerUsername = localStorage.getItem("username");
+
+  useEffect(() => {
+    const loadNotifications = async () => {
+      const result = await fetchNotifications(managerUsername);
+      if (result.success) {
+        setNotifications(result.data);
+      } else {
+        console.error("Failed to load notifications:", result.error);
+      }
+    };
+
+    loadNotifications();
+  }, [managerUsername]);
+
+  const renderNotificationContent = (notification) => {
+    if (notification.about === "message") {
+      return (
+        <p>
+          <b>{notification.investorUsername}</b> started a chat with you
+        </p>
+      );
+    }
+
+    return (
+      <>
+        <p>
+          <b>{notification.investorUsername}</b> has fixed a meeting with you
+        </p>
+        <p>
+          Date: {formatDate(notification.meetingTime)}
+          <br />
+          Time: {formatTime(notification.meetingTime)}
+        </p>
+      </>
+    );
+  };
 
   return (
     <section className="section-50">
@@ -35,7 +50,6 @@ const NotificationView = () => {
         <h3 className="m-b-50 heading-line">
           Notifications <i className="fa fa-bell text-muted"></i>
         </h3>
-
         <div className="notification-ui_dd-content">
           {Array.isArray(notifications) && notifications.length > 0 ? (
             notifications.reverse().map((notification) => (
@@ -45,37 +59,20 @@ const NotificationView = () => {
               >
                 <div className="notification-list_content">
                   <div className="notification-list_img">
-                    {notification.about === "message" ? (
-                      <img src={Message} alt="user" />
-                    ) : (
-                      <img src={Meeting} alt="user" />
-                    )}
+                    <img
+                      src={
+                        notification.about === "message"
+                          ? IMAGES.MESSAGE
+                          : IMAGES.MEETING
+                      }
+                      alt="notification icon"
+                    />
                   </div>
                   <div className="notification-list_detail">
-                    {notification.about === "message" ? (
-                      <p>
-                        <b>{notification.investorUsername}</b> started a chat
-                        with you
-                      </p>
-                    ) : (
-                      <>
-                        <p>
-                          <b>{notification.investorUsername}</b> has fixed a
-                          meeting with you
-                        </p>
-                        <p>
-                          Date: {formatDate(notification.meetingTime)}
-                          <br />
-                          Time: {formatTime(notification.meetingTime)}
-                        </p>
-                      </>
-                    )}
+                    {renderNotificationContent(notification)}
                   </div>
                 </div>
-
-                <div className="notification-list_feature-img">
-                  {/* <img src={notification.featureImage} alt="Feature image" /> */}
-                </div>
+                <div className="notification-list_feature-img"></div>
               </div>
             ))
           ) : (

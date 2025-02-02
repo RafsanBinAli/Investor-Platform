@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { getConversations } from "../../../api/message";
-
+import { IMAGES } from "../../../constants/images";
 const Dashboard = ({ handlePerson, isConversationCreated }) => {
-  const InvestorImage="https://i.ibb.co.com/tprVXDRX/investor.jpg" ;
+
   const senderUsername = localStorage.getItem("username");
   const userType = localStorage.getItem("userType");
   const [conversationNames, setConversationNames] = useState([]);
@@ -30,7 +30,7 @@ const Dashboard = ({ handlePerson, isConversationCreated }) => {
     <div className="dashboard">
       <div className="inside-dash">
         <div className="profile-box">
-          <img src={InvestorImage} className="profile-pic" alt="Profile" />
+          <img src={IMAGES.INVESTOR} className="profile-pic" alt="Profile" />
           <div className="my-profile">
             <div className="name">{senderUsername}</div>
             <div className="type">{userType}</div>
@@ -48,7 +48,7 @@ const Dashboard = ({ handlePerson, isConversationCreated }) => {
               onClick={() => handleShowConvo(person)}
             >
               <img
-                src={InvestorImage}
+                src={IMAGES.INVESTOR}
                 className="profile-pic"
                 alt="Profile"
               />
