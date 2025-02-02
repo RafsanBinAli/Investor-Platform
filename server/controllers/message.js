@@ -5,30 +5,34 @@ const prisma = new PrismaClient();
 
 exports.sendMessage = async (req, res) => {
   try {
-    const { senderUsername, receiverUsername, content } = req.body;
-    const [senderName, senderType] = senderUsername.split("+");
-    const [receiverName, receiverType] = receiverUsername.split("+");
-    console.log(senderName, receiverName);
+    const { receiverUsername, content } = req.body;
+    const senderName = req.user.username;
+    const senderType = req.user.userType;
+    const receiverName = receiverUsername;
+    const receiverType = senderType == "investor" ? "manager" : "investor";
+
+    console.log(senderName,senderType,receiverName,receiverType)
+
     let conversation = await prisma.conversation.findFirst({
       where: {
         OR: [
           {
-            investorUsername:
-              senderType === "investor" ? senderName : receiverName,
-            startupManagerUsername:
-              senderType === "manager" ? senderName : receiverName,
+            AND: {
+              investorUsername: senderName,
+              startupManagerUsername: receiverName
+            }
           },
           {
-            investorUsername:
-              receiverType === "investor" ? receiverName : senderName,
-            startupManagerUsername:
-              receiverType === "manager" ? receiverName : senderName,
-          },
-        ],
-      },
+            AND: {
+              investorUsername: receiverName,
+              startupManagerUsername: senderName
+            }
+          }
+        ]
+      }
     });
 
-    console.log(conversation)
+    console.log(conversation);
 
     // If conversation doesn't exist, create a new one
     if (!conversation) {

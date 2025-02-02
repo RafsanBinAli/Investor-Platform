@@ -15,19 +15,10 @@ const Messaging = ({ messagePartner }) => {
   // Only set these values if messagePartner exists
   const senderUsername = username;
   const receiverUsername = messagePartner?.name 
-    ? userType === "investor" 
-      ? `${messagePartner.name}+manager`
-      : userType === "startup" 
-        ? `${messagePartner.name}+manager` 
-        : messagePartner.name
-    : "";
+   
 
   const sender = senderUsername;
-  const modifiedSenderUsername = userType === "investor" 
-    ? `${senderUsername}+investor`
-    : userType === "startup" 
-      ? `${senderUsername}+manager`
-      : senderUsername;
+  
 
   useEffect(() => {
     if (messageContainerRef.current) {
@@ -65,7 +56,7 @@ const Messaging = ({ messagePartner }) => {
 
   const handleSendMessage = async () => {
     if (newMessage.trim() && messagePartner?.id) {
-      const result = await sendMessage(newMessage, modifiedSenderUsername, receiverUsername);
+      const result = await sendMessage(newMessage, receiverUsername);
 
       if (result.success) {
         setAllMessage(prev => [...prev, { 

@@ -218,7 +218,7 @@ router.get("/bar", async (req, res) => {
 
 //sending message
 
-router.post("/send-message", sendMessage);
+
 
 //getting the prev conversations for Dashboard
 router.get("/conversations", async (req, res) => {

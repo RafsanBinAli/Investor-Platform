@@ -21,17 +21,17 @@ export const fetchMessages = async (conversationId) => {
   }
 };
 
-export const sendMessage = async (content, senderUsername, receiverUsername) => {
+export const sendMessage = async (content, receiverUsername) => {
   try {
-    console.log("Here it is coming")
-    const response = await fetch(`${BASE_URL}/send-message`, {
+    const authToken = localStorage.getItem("auth_token");
+    const response = await fetch(`${BASE_URL}/conversation/send-message`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${authToken}`
       },
       body: JSON.stringify({
         content,
-        senderUsername,
         receiverUsername,
       }),
     });

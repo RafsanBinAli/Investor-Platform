@@ -18,8 +18,6 @@ const RightBar = ({ onSearch }) => {
         console.log("error fetching data");
       }
       const data = await response.json();
-      console.log("paise");
-      console.log(data);
       setChartData(data);
     };
     fetchData();
