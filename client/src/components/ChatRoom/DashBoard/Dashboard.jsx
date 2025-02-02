@@ -1,8 +1,9 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Dashboard.css";
 import InvestorImage from "./investor.jpg";
+import { getConversations } from "../../../api/message";
 
-const Dashboard = ({ handlePerson }) => {
+const Dashboard = ({ handlePerson, isConversationCreated }) => {
   const senderUsername = localStorage.getItem("username");
   const userType = localStorage.getItem("userType");
   const [conversationNames, setConversationNames] = useState([]);
@@ -13,40 +14,26 @@ const Dashboard = ({ handlePerson }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        console.log("In FetchData");
-        const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/conversations?username=${senderUsername}`
-        );
+      const { success, data, error } = await getConversations(senderUsername);
 
-        if (response.ok) {
-          const names = await response.json();
-          console.log(names.otherNames);
-          setConversationNames(names.otherNames);
-        } else {
-          const errorData = await response.text();
-          console.log(
-            "Error fetching conversation names:",
-            response.status,
-            errorData
-          );
-        }
-      } catch (error) {
-        console.error(error);
+      if (success) {
+        setConversationNames(data);
+      } else {
+        console.error("Error fetching conversation names:", error);
       }
     };
 
     fetchData();
-  }, [senderUsername]);
+  }, [ isConversationCreated]); // Refetch when isConversationCreated changes
 
   return (
     <div className="dashboard">
       <div className="inside-dash">
         <div className="profile-box">
-          <img src={InvestorImage} className="profile-pic" />
+          <img src={InvestorImage} className="profile-pic" alt="Profile" />
           <div className="my-profile">
-            <div className="name">{senderUsername} </div>
-            <div className="type"> {userType} </div>
+            <div className="name">{senderUsername}</div>
+            <div className="type">{userType}</div>
           </div>
         </div>
 
@@ -60,8 +47,12 @@ const Dashboard = ({ handlePerson }) => {
               className="contacts"
               onClick={() => handleShowConvo(person)}
             >
-              <img src={InvestorImage} className="profile-pic" alt="Profile" />
-              <p className="contact-name"> {person.name}</p>
+              <img
+                src={InvestorImage}
+                className="profile-pic"
+                alt="Profile"
+              />
+              <p className="contact-name">{person.name}</p>
             </div>
           ))}
         </div>
@@ -69,4 +60,5 @@ const Dashboard = ({ handlePerson }) => {
     </div>
   );
 };
+
 export default Dashboard;

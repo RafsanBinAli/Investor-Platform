@@ -12,6 +12,7 @@ const mysql = require('mysql2/promise');
 const prisma = new PrismaClient();
 var indexRouter = require('./routes/index');
 var startupRouter = require('./routes/startup');
+var conversationRouter = require('./routes/conversation');
 
 var app = express();
 const httpServer = http.createServer(app);
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/', indexRouter);
 app.use('/startup', startupRouter);
+app.use('/conversation', conversationRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

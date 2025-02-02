@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const { signup, login } = require("../controllers/investors");
 const { allStartups } = require("../controllers/startup");
 const { getParticularMeeting } = require("../controllers/schedule");
-const { sendMessage } = require("./message");
+const { sendMessage } = require("../controllers/message");
 const prisma = new PrismaClient();
 
 /* GET home page. */

@@ -5,7 +5,7 @@ import UserContext from "../../contexts/userContext";
 
 const StartupBody = ({}) => {
   const navigate = useNavigate();
-  const { setStartupCode, setChatManagerName } = useContext(UserContext);
+  const { setStartupCode } = useContext(UserContext);
 
   const [startupInfo, setStartupInfo] = useState({
     startupName: "",
@@ -47,8 +47,9 @@ const StartupBody = ({}) => {
     navigate("/deal-room");
   };
   const handleClickToChat = () => {
-    setChatManagerName(startupInfo.startupManagerUsername);
-    navigate("/chat-room");
+    navigate("/chat-room", {
+      state: { chatManagerName: startupInfo.startupManagerUsername }
+    });
   };
 
   return (

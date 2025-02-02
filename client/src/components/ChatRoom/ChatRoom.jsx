@@ -1,48 +1,39 @@
 import Dashboard from "./DashBoard/Dashboard";
 import Messaging from "./Messaging/Messaging";
 import "./ChatRoom.css";
-import { useContext, useState, useEffect } from "react";
-import UserContext from "../../contexts/userContext";
+import { useState, useEffect } from "react";
+import { createConversation } from "../../api/message"; // Import the function
+import { useLocation } from "react-router-dom";
 
 const ChatRoom = () => {
   const [messagePartner, setMessagePartner] = useState([]);
-  const { chatManagerName } =
-    useContext(UserContext);
-    const username= localStorage.getItem('username')
+  const location = useLocation();
+  const { chatManagerName } = location.state || {};
+  const [isConversationCreated, setIsConversationCreated] = useState(false); // New state to trigger refetch
 
   const handlePerson = (person) => {
     setMessagePartner(person);
   };
 
   useEffect(() => {
-    console.log(chatManagerName);
-    console.log(messagePartner.length);
-    try {
-      const fetchData = async () => {
-        if (messagePartner.length === 0) {
-          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/create-convo`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              investor: username,
-              startupManager: chatManagerName,
-            }),
-          });
-          console.log(response);
+    const fetchData = async () => {
+      if (messagePartner.length === 0) {
+        if (chatManagerName) {
+          await createConversation(chatManagerName);
+          setIsConversationCreated(true); // Mark conversation as created
         }
-      };
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    }
-  });
+      }
+    };
+
+    fetchData();
+  }, [chatManagerName, messagePartner]);
+
   return (
     <div className="chatroom">
-      <Dashboard handlePerson={handlePerson} />
+      <Dashboard handlePerson={handlePerson} isConversationCreated={isConversationCreated} />
       <Messaging messagePartner={messagePartner} />
     </div>
   );
 };
+
 export default ChatRoom;
