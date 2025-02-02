@@ -5,10 +5,12 @@ const {
   createConversation,
 } = require("../controllers/communication");
 const authenticateToken = require("../middlewares/authMiddleware");
-const { sendMessage } = require("../controllers/message");
+const { sendMessage, retrieveMessage } = require("../controllers/message");
 
 router.get("/all", getConversation);
 router.post("/create", authenticateToken, createConversation);
 
-router.post("/send-message",authenticateToken, sendMessage);
+router.post("/send-message", authenticateToken, sendMessage);
+router.get("/message-retrive", retrieveMessage);
+
 module.exports = router;

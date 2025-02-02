@@ -1,7 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const jwt = require("jsonwebtoken");
-// Startup Manager Controllers
+
+
 exports.signup = async (req, res) => {
   try {
     await prisma.startupManager.create({
@@ -25,9 +26,9 @@ exports.login = async (req, res) => {
       return res.status(401).json({ error: "Invalid username or password" });
     }
     const token = jwt.sign(
-      { userId: user.NID, username: user.Username, userType: "manager" }, // Payload
-      process.env.JWT_SECRET, // Secret key from environment variable (keep this private)
-      { expiresIn: "1h" } // Token expiration time
+      { userId: user.NID, username: user.Username, userType: "manager" }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: "365d" } 
     );
 
     res.status(200).json({ message: "Login successful", user, token });

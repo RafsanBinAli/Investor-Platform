@@ -114,3 +114,28 @@ exports.sendMessage = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
+
+exports.retrieveMessage= async (req, res) => {
+  const convoID = req.query.convoID;
+  try {
+    const messages = await prisma.message.findMany({
+      where: {
+        conversationId: Number(convoID),
+      },
+    });
+    const formattedMessages = messages.map((message) => ({
+      id: message.id,
+      content: message.content,
+      sender: message.sender,
+      receiver: message.receiver,
+    }));
+
+    res.status(200).json(formattedMessages);
+  } catch (error) {
+    console.log("error", error.status);
+    res.status(500).json("jhamela hoise");
+  }
+};
+

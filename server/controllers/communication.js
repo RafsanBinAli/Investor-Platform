@@ -33,7 +33,6 @@ exports.getConversation = async (req, res) => {
     });
 
     if (conversations.length > 0) {
-      
       res.status(200).json({
         message: "Found all the conversations",
         conversations,
@@ -105,7 +104,8 @@ exports.createConversation = async (req, res) => {
     return res.status(200).json({ conversationId: newConversation.id });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "An error occurred while creating the conversation" });
+    res
+      .status(500)
+      .json({ error: "An error occurred while creating the conversation" });
   }
 };
-
