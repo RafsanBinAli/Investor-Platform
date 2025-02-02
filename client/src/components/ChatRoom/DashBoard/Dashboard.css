@@ -1,75 +1,168 @@
+/* Dashboard.css */
 .dashboard {
-	display: flex;
-	flex: 2;
-	border-right: solid 1px;
-	justify-content: center;
-	align-items: center;
-	box-shadow: 0px 2px 3px#c4c6c9;
+	flex: 0 0 300px;
+	background: white;
+	border-right: 1px solid #e5e7eb;
 	height: 91vh;
-}
-
-.inside-dash {
+	display: flex; /* Add this */
+	flex-direction: column; /* Add this */
+  }
+  
+  .inside-dash {
+	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
+	gap: 2rem;
 	height: 91vh;
-	width: 100%;
 	overflow: auto;
-}
-.name {
-	font-size: 20px;
-	font-weight: 500;
-}
-.type {
-	font-size: 14px;
-	font-weight: 400;
-}
-.my-profile {
-	margin-left: 1rem;
-	display: flex; /* Add display: flex to make it a flex container */
-	flex-direction: column;
-	margin-top: 10px;
-	justify-content: center;
+  }
+  
+  /* Profile Box Styling */
+  .profile-box {
+	display: flex;
 	align-items: center;
-}
-
-.profile-pic {
-	width: 60px;
-	height: 60px;
+	gap: 1rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 2px solid #f3f4f6;
+  }
+  
+  .profile-pic {
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
-	border: 2px solid #0c0c0c;
-}
-
-.profile-box {
-	margin-top: 3rem;
-	margin-bottom: 3rem;
+	object-fit: cover;
+	border: 2px solid #4f46e5;
+	padding: 2px;
+  }
+  
+  .my-profile {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-bottom: 50px;
-	border-bottom: solid 1px;
-}
-.contacts {
-	height: 100px;
-	width: 80%;
-	display: flex;
-	margin-bottom: 25px;
-	align-items: center; /* Align hr vertically in the middle */
-	/* border-bottom: solid 1px gray; */
-	/* box-shadow: 0px 2px 3px#c4c6c9; */
-	padding-left: 20px;
-	margin-left: 2rem;
-	border-bottom: solid 1px gray;
-}
-.message-dash-header {
-	font-size: 18px;
-	margin-left: 2rem;
-	margin-bottom: 2rem;
-	font-family: Arial, Helvetica, sans-serif;
-	color: rgb(9, 37, 160);
+	flex-direction: column;
+	gap: 0.25rem;
+  }
+  
+  .name {
 	font-weight: 600;
-}
+	color: #1f2937;
+	font-size: 1.1rem;
+  }
+  
+  .type {
+	color: #6b7280;
+	font-size: 0.9rem;
+	text-transform: capitalize;
+  }
+  
+  /* Message Dashboard Styling */
+  .message-dash {
+	flex: 1;
+	overflow-y: auto;
+  }
+  
+  .message-dash-header {
+	color: #4b5563;
+	margin-bottom: 1.5rem;
+	font-size: 1rem;
+	font-weight: 600;
+  }
+  
+  .message-dash-header u {
+	text-decoration-color: #4f46e5;
+	text-underline-offset: 4px;
+  }
+  
+  /* Contacts List Styling */
+  .contacts {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.75rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	margin-bottom: 0.5rem;
+  }
+  
+  .contacts:hover {
+	background-color: #f3f4f6;
+  }
+  
+  .contacts.active {
+	background-color: #ede9fe;
+  }
+  
+  .contact-name {
+	color: #374151;
+	font-size: 0.95rem;
+	margin: 0;
+  }
+  
+  /* Scrollbar Styling */
+  .message-dash::-webkit-scrollbar {
+	width: 6px;
+  }
+  
+  .message-dash::-webkit-scrollbar-track {
+	background: #f1f1f1;
+  }
+  
+  .message-dash::-webkit-scrollbar-thumb {
+	background: #cbd5e1;
+	border-radius: 3px;
+  }
+  
+  .message-dash::-webkit-scrollbar-thumb:hover {
+	background: #94a3b8;
+  }
+  
+  /* Animations */
+  @keyframes slideIn {
+	from {
+	  transform: translateX(-10px);
+	  opacity: 0;
+	}
+	to {
+	  transform: translateX(0);
+	  opacity: 1;
+	}
+  }
+  
+  .contacts {
+	animation: slideIn 0.3s ease;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+	.dashboard {
+	  flex: 0 0 250px;
+	}
+  
+	.inside-dash {
+	  padding: 1rem;
+	}
+  
+	.profile-pic {
+	  width: 40px;
+	  height: 40px;
+	}
+  
+	.name {
+	  font-size: 1rem;
+	}
+  }
+  
+  @media (max-width: 640px) {
+	.dashboard {
+	  flex: 0 0 100%;
+	  height: auto;
+	  max-height: 50vh;
+	}
+  }
 
-.contact-name {
-	margin-left: 10px;
-	margin-top: 12px;
-}
+  .chatroom {
+	display: flex;
+	width: 100%;
+	height: 91vh;
+	background-color: #f9fafb;
+	overflow: hidden; /* Prevent any unwanted scrolling */
+  }

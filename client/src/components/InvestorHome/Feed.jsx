@@ -19,19 +19,29 @@ const Feed = ({ startupName }) => {
   };
 
   const getFilteredStartups = () => {
-    if (!startupName) return startupData;
+    let filteredStartups = [...startupData];
 
-    const filteredByName = startupData.filter(
-      startup => startup.startupName.toLowerCase() === startupName.toLowerCase()
-    );
+    // First filter by name if a search term exists
+    if (startupName) {
+      filteredStartups = filteredStartups.filter(startup => 
+        startup.startupName.toLowerCase().includes(startupName.toLowerCase())
+      );
+    }
 
-    return selectedIndustry === 'all'
-      ? filteredByName
-      : filteredByName.filter(startup => startup.industry === selectedIndustry);
+    // Then filter by industry if not 'all'
+    if (selectedIndustry !== 'all') {
+      filteredStartups = filteredStartups.filter(startup => 
+        startup.industry === selectedIndustry
+      );
+    }
+
+    return filteredStartups;
   };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+
+  const filteredStartups = getFilteredStartups();
 
   return (
     <div className="feed">
@@ -42,10 +52,14 @@ const Feed = ({ startupName }) => {
           onIndustryChange={handleIndustryChange}
         />
       </div>
-      <StartupList
-        startups={getFilteredStartups()}
-        onViewDetails={handleViewDetails}
-      />
+      {filteredStartups.length === 0 ? (
+        <div className="no-results">No startups found matching your criteria</div>
+      ) : (
+        <StartupList
+          startups={filteredStartups}
+          onViewDetails={handleViewDetails}
+        />
+      )}
     </div>
   );
 };

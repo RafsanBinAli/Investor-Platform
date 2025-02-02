@@ -37,27 +37,25 @@ const DealRoomSearch = () => {
 
   return (
     <div className="search">
-      <div className="search-contain">
-        <div className="searh-header">
-          <h1 className="headerh1">
-            Search to know if a meeting was already fixed!
-          </h1>
-        </div>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Code"
-            name="code"
-            value={code}
-            onChange={handleChange}
-          />
-          <button className="btn btn-secondary" onClick={handleSubmit}>
-            Search
-          </button>
-        </div>
-        <MeetingDetails ab={meetingData} />
-      </div>
+  <div className="search-contain">
+    <div className="searh-header">
+      <h1 className="headerh1">
+        Search to know if a meeting was already fixed!
+      </h1>
     </div>
+    <div className="input">
+      <input
+        type="text"
+        placeholder="Code"
+        name="code"
+        value={code}
+        onChange={handleChange}
+      />
+      <i className="fas fa-search" onClick={handleSubmit}></i>
+    </div>
+    <MeetingDetails ab={meetingData} />
+  </div>
+</div>
   );
 };
 

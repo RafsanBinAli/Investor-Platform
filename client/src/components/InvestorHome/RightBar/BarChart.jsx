@@ -1,7 +1,26 @@
 import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+// Register the required components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const BarChart = ({ data }) => {
-  const ChartData = {
+  const chartData = {
     labels: data.map((item) => item.fieldName),
     datasets: [
       {
@@ -14,28 +33,27 @@ const BarChart = ({ data }) => {
     ],
   };
 
-  const chartOptions = {
+  const options = {
+    responsive: true,
+    maintainAspectRatio: true,
     scales: {
-      xAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: "Field Names",
-          },
+      x: {  // Updated from xAxes
+        title: {
+          display: true,
+          text: 'Field Names'
+        }
+      },
+      y: {  // Updated from yAxes
+        title: {
+          display: true,
+          text: 'Count'
         },
-      ],
-      yAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: "Count",
-          },
-        },
-      ],
-    },
+        beginAtZero: true
+      }
+    }
   };
 
-  return <Bar data={ChartData} options={chartOptions} />;
+  return <Bar data={chartData} options={options} />;
 };
 
 export default BarChart;

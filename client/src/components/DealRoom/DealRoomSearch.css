@@ -1,35 +1,75 @@
+/* DealRoomSearch.css */
 .search {
-	flex: 1;
-	border-left: 1px solid;
+  padding: 2rem;
+  min-height: 100vh;
+  background: #f8f9fa;
 }
+
 .search-contain {
-	margin: 80px;
-	margin-top: 6rem;
-	margin-left: 10rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
+
+.searh-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .headerh1 {
-	font-size: 45px;
-	font-weight: 600;
-	font-family: "Times New Roman", Times, serif;
+  font-size: 1.8rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
 }
+
 .input {
-	/* margin: 30px; */
-	margin-top: 30px;
-	margin-bottom: 100px;
+  position: relative;
+  margin-bottom: 2rem;
 }
+
 .input input {
-	padding: 11px;
-	border: 2px solid #ccc;
-	border-radius: 5px;
-	font-size: 18px;
-	margin-right: 10px;
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
-.meeting-details {
-	width: 500px;
-	height: 300px;
-	border: 3px solid #1a1818;
-	padding: 10px;
+
+.input input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
-.p {
-	font-size: 20px;
+
+.input .fas.fa-search {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.input .fas.fa-search:hover {
+  color: #4f46e5;
+}
+
+@media (max-width: 768px) {
+  .search {
+    padding: 1rem;
+  }
+
+  .search-contain {
+    padding: 1.5rem;
+  }
+
+  .headerh1 {
+    font-size: 1.5rem;
+  }
 }

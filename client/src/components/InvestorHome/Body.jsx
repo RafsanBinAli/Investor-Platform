@@ -10,7 +10,7 @@ const Body = () => {
   return (
     <>
       <Feed startupName={startupName} />
-      {/* <RightBar onSearch={handleSearch} /> */}
+      <RightBar onSearch={handleSearch} />
     </>
   );
 };

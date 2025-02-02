@@ -1,11 +1,115 @@
-.Search-Header {
-	padding-bottom: 20px;
-	font-family: "Times New Roman", Times, serif;
-}
-.header {
-	font-size: 40px !important;
+/* RightBar.css */
+.rightbar {
+	padding: 20px;
+	background-color: #f8f9fa;
+	border-radius: 12px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	height: 100%;
+  }
+  
+  .rightbar-inside {
+	max-width: 800px;
+	margin: 0 auto;
+  }
+  
+  .Search-Header {
+	margin-bottom: 24px;
+	text-align: center;
+  }
+  
+  .Search-Header .header {
+	font-size: 1.8rem;
+	color: #2d3748;
 	font-weight: 600;
-}
+	margin: 0;
+	padding-bottom: 10px;
+	position: relative;
+  }
+  
+  .Search-Header .header:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60px;
+	height: 3px;
+	background: #4f46e5;
+	border-radius: 2px;
+  }
+  
+  /* Search Input Styling */
+  .input-group {
+	margin: 20px 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	border-radius: 8px;
+	overflow: hidden;
+  }
+  
+  .input-group .form-control {
+	border: none;
+	padding: 15px 20px;
+	font-size: 1rem;
+	transition: all 0.3s ease;
+  }
+  
+  .input-group .form-control:focus {
+	box-shadow: none;
+	background-color: #fff;
+  }
+  
+  .input-group-append .input-group-text {
+	background-color: #4f46e5;
+	border: none;
+	color: white;
+	padding: 0 20px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+  }
+  
+  .input-group-append .input-group-text:hover {
+	background-color: #4338ca;
+  }
+  
+  .input-group-append .fas {
+	font-size: 1.2rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+	.rightbar {
+	  padding: 15px;
+	}
+  
+	.Search-Header .header {
+	  font-size: 1.5rem;
+	}
+  
+	.input-group .form-control {
+	  padding: 12px 15px;
+	}
+  
+	.input-group-append .input-group-text {
+	  padding: 0 15px;
+	}
+  }
+  
+  /* Animation for search icon on hover */
+  .input-group-append .input-group-text:hover .fas {
+	animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+	0% {
+	  transform: scale(1);
+	}
+	50% {
+	  transform: scale(1.1);
+	}
+	100% {
+	  transform: scale(1);
+	}
+  }
 .chart {
 	margin-left: 20px;
 	height: 500px;
@@ -19,25 +123,4 @@
 	margin-bottom: 40px;
 	font-family: "Times New Roman", Times, serif;
 	font-weight: 700;
-}
-.rightbar-inside {
-	margin-top: 7rem;
-}
-.mt-3 {
-	padding: 5rem;
-
-	border: 2px solid;
-}
-
-.rightbar {
-	flex: 2;
-	border-left: solid 2px rgb(230, 229, 229);
-	padding: 20px;
-}
-
-.form-control {
-	right: 0px;
-}
-.rightbar-inside {
-	margin-left: 50px;
 }
