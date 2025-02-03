@@ -3,8 +3,6 @@
 
 A modern web application that connects startup founders with potential investors, inspired by Shark Tank. This platform facilitates direct communication, investment proposals, and business opportunity evaluation.
 
-## 🌐 Live Demo
-
 ## 🌟 Key Features
 
 ### For Investors
